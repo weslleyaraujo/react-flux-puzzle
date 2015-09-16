@@ -1,5 +1,6 @@
 import React from 'react';
 import Field from './field';
+import fieldsStore from '../store/fields-store';
 
 export default class Board extends React.Component {
 
@@ -11,8 +12,8 @@ export default class Board extends React.Component {
     return(
       <div className="c-board">
         {
-          Array.apply(null, { length: 5 }).map(() => {
-            return (<Field />)
+          fieldsStore.getAll().map((row) => {
+            return (<Field row={row}/>)
           })
         }
       </div>
