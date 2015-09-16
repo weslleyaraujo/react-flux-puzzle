@@ -42,3 +42,4 @@ node_modules
 
 ### Project ###
 .DS_Store
+dist
