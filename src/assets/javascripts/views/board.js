@@ -10,13 +10,13 @@ export default class Board extends React.Component {
 
   render = () => {
     return(
-      <div className="c-board">
+      <ul className="c-board">
         {
           fieldsStore.getAll().map((row) => {
             return (<Field row={row}/>)
           })
         }
-      </div>
+      </ul>
     )
   }
 }
