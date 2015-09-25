@@ -7,23 +7,41 @@ import { uniqueId } from 'underscore';
 import { EventEmitter } from 'events';
 
 export default new class FieldsStore extends EventEmitter {
-  static size = 5
+  static size = 10
+  static lines = 5
   static fields = []
 
   constructor() {
     super();
 
-    this.prepare();
+    this.create();
     this.bind();
   }
 
-  prepare = () => {
-    FieldsStore.fields = createArray(FieldsStore.size).map(() => {
+  set all(value) {
+    return FieldsStore.fields = value;
+  }
+
+  get all() {
+    return FieldsStore.fields;
+  }
+
+
+  get nextGuess() {
+    return _(this.all)
+      .chain()
+      .where({ isMatched: false })
+      .first()
+      .value();
+  }
+
+  create = () => {
+    this.all = createArray(FieldsStore.size).map(() => {
       return {
         id: uniqueId(),
         isMatched: false,
-        lines: createArray(FieldsStore.size).map(() => {
-          return createArray(FieldsStore.size).map(() => {
+        lines: createArray(FieldsStore.lines).map(() => {
+          return createArray(FieldsStore.lines).map(() => {
             return {
               active: flipCoin()
             }
@@ -43,18 +61,6 @@ export default new class FieldsStore extends EventEmitter {
 
   onActionTrial = (action) => {
     console.log('is a match?', this.isMatched(action.id));
-  }
-
-  get nextGuess() {
-    return _(FieldsStore.fields)
-      .chain()
-      .where({ isMatched: false })
-      .first()
-      .value();
-  }
-
-  get all() {
-    return FieldsStore.fields;
   }
 
   isMatched = (id) => {
