@@ -7,7 +7,6 @@ export default class Field extends React.Component {
     super(props);
   }
 
-
   static defaultProps = {
     row: {
       lines: []

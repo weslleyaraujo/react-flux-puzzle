@@ -4,6 +4,10 @@ import fieldsStore from '../store/fields-store';
 
 export default class Board extends React.Component {
 
+  state = {
+    fields: fieldsStore.all
+  }
+
   constructor(props) {
     super(props);
   }
@@ -14,7 +18,7 @@ export default class Board extends React.Component {
         <h2>CALLBACK CODE</h2>
         <ul className="c-board__list c-inline-list">
           {
-            fieldsStore.getAll().map((row) => {
+            this.state.fields.map((row) => {
               return (<li className="c-inline-list__item"><Field row={row}/></li>)
             })
           }
