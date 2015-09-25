@@ -10,13 +10,16 @@ export default class Board extends React.Component {
 
   render = () => {
     return(
-      <ul className="c-board">
-        {
-          fieldsStore.getAll().map((row) => {
-            return (<Field row={row}/>)
-          })
-        }
-      </ul>
+      <div className="c-board">
+        <h2>CALLBACK CODE</h2>
+        <ul className="c-board__list c-inline-list">
+          {
+            fieldsStore.getAll().map((row) => {
+              return (<li className="c-inline-list__item"><Field row={row}/></li>)
+            })
+          }
+        </ul>
+      </div>
     )
   }
 }

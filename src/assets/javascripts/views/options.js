@@ -13,10 +13,15 @@ export default class Options extends React.Component {
   render = () => {
     return (
       <div className="c-options">
-        <p>Choose to crack the code:</p>
-        <ul className="c-options__list">
+        <ul className="c-options__list c-inline-list">
           { shuffle(fieldsStore.getAll()).map((row) => {
-              return (<Field row={row}/>)
+              return (
+                  <li className="c-inline-list__item">
+                    <button className="c-options__button">
+                      <Field row={row}/>
+                    </button>
+                  </li>
+              )
             })
           }
         </ul>

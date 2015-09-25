@@ -16,27 +16,23 @@ export default class Field extends React.Component {
 
   render = () => {
     return (
-      <li className="c-field">
-        <table>
-          <tbody>
-            { this.props.row.lines.map((row) => {
-              return (<tr className="c-field__line">
-                {
-                  row.map((line) => {
-                    return (<td
-                      className={cx({
-                        'c-field__item': true,
-                        'is-active': line.active
-                      })}
-                    >
-                    </td>)
-                  })
-                }
-              </tr>)
-          }) }
-        </tbody>
-      </table>
-    </li>
+      <table className="c-field">
+        { this.props.row.lines.map((row) => {
+          return (<tr className="c-field__line">
+            {
+              row.map((line) => {
+                return (<td
+                  className={cx({
+                    'c-field__item': true,
+                    'is-active': line.active
+                  })}
+                >
+                </td>)
+              })
+            }
+          </tr>)
+      }) }
+    </table>
     )
   }
 }
