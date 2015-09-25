@@ -1,3 +1,3 @@
 # React Flux Puzzle
 
-* in development *
+*in development*
