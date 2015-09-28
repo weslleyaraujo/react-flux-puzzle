@@ -4,6 +4,8 @@ export default class Timer extends React.Component {
 
   constructor(props) {
     super(props);
+
+    this.start();
   }
 
   state = {
@@ -11,7 +13,18 @@ export default class Timer extends React.Component {
   }
 
   static defaultProps = {
-    size: 1
+    size: 1,
+    speed: 300
+  }
+
+  start = () => {
+    this.interval = setInterval(this.onInterval, this.props.speed);
+  }
+
+  onInterval = () => {
+    this.setState({
+      size: this.state.size + 0.5
+    })
   }
 
   render = () => {
