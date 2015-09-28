@@ -7,7 +7,7 @@ import { uniqueId } from 'underscore';
 import { EventEmitter } from 'events';
 
 export default new class FieldsStore extends EventEmitter {
-  static size = 10
+  static size = 5
   static lines = 5
   static fields = []
 
@@ -25,7 +25,6 @@ export default new class FieldsStore extends EventEmitter {
   get all() {
     return FieldsStore.fields;
   }
-
 
   get nextGuess() {
     return _(this.all)
@@ -60,7 +59,19 @@ export default new class FieldsStore extends EventEmitter {
   }
 
   onActionTrial = (action) => {
-    console.log('is a match?', this.isMatched(action.id));
+    if (this.isMatched(action.id)) {
+      this.setMatched();
+    }
+
+    /*
+     * TODO: game over!
+     */
+    this.emitChange();
+
+  }
+
+  setMatched = () => {
+    this.nextGuess.isMatched = true;
   }
 
   isMatched = (id) => {

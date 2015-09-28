@@ -1,6 +1,7 @@
 import React from 'react';
 import Board from './views/board';
 import Options from './views/options';
+import Timer from './views/timer';
 
 class App extends React.Component {
   render = () => {
@@ -8,6 +9,7 @@ class App extends React.Component {
       <div>
         <Board />
         <Options />
+        <Timer />
       </div>
     )
   }

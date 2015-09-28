@@ -15,9 +15,9 @@ export default class Field extends React.Component {
 
   render = () => {
     return (
-      <table className="c-field">
+      <table className='c-field'>
         { this.props.row.lines.map((row) => {
-          return (<tr className="c-field__line">
+          return (<tr className='c-field__line'>
             {
               row.map((line) => {
                 return (<td
