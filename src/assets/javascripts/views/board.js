@@ -2,12 +2,12 @@ import React from 'react';
 import cx from 'react/lib/cx';
 
 import Field from './field';
-import fieldsStore from '../store/fields-store';
+import gameStore from '../store/game-store';
 
 export default class Board extends React.Component {
 
   state = {
-    fields: fieldsStore.all
+    fields: gameStore.all
   }
 
   constructor(props) {
@@ -16,12 +16,12 @@ export default class Board extends React.Component {
   }
 
   bind = () => {
-    fieldsStore.addChangeListener(this.onChange);
+    gameStore.addChangeListener(this.onChange);
   }
 
   onChange = () => {
     this.setState({
-      fields: fieldsStore.all
+      fields: gameStore.all
     })
   }
 

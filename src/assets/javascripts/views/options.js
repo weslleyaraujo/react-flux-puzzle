@@ -3,12 +3,12 @@ import { shuffle } from 'underscore';
 
 import Field from './field';
 import matchActions from '../actions/match';
-import fieldsStore from '../store/fields-store';
+import gameStore from '../store/game-store';
 
 export default class Options extends React.Component {
 
   state = {
-    fields: fieldsStore.all
+    fields: gameStore.all
   }
 
   constructor(props) {

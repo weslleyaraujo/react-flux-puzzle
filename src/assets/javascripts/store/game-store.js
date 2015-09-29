@@ -1,29 +1,37 @@
-import appDispatcher from '../dispatcher/app-dispatcher';
-import createArray from '../helpers/create-array';
-import flipCoin from '../helpers/flip-coin';
 import _ from 'underscore';
 
-import { uniqueId } from 'underscore';
-import { EventEmitter } from 'events';
+import appDispatcher from '../dispatcher/app-dispatcher';
+import createFields from '../helpers/create-fields';
+import { EventEmitter as Events } from 'events';
 
-export default new class FieldsStore extends EventEmitter {
-  static size = 5
-  static lines = 5
-  static fields = []
+export default new class GameStore extends Events {
 
   constructor() {
     super();
 
-    this.create();
+    this.all = createFields(this.data.game.lines, this.data.game.size);
     this.bind();
   }
 
+  data = {
+    fields: [],
+    game: {
+      isPlaying: false,
+      lose: false,
+      level: 0,
+      wins: 0,
+      lines: 5,
+      size: 5,
+    }
+
+  }
+
   set all(value) {
-    return FieldsStore.fields = value;
+    return this.data.fields = value;
   }
 
   get all() {
-    return FieldsStore.fields;
+    return this.data.fields;
   }
 
   get nextGuess() {
@@ -32,22 +40,6 @@ export default new class FieldsStore extends EventEmitter {
       .where({ isMatched: false })
       .first()
       .value();
-  }
-
-  create = () => {
-    this.all = createArray(FieldsStore.size).map(() => {
-      return {
-        id: uniqueId(),
-        isMatched: false,
-        lines: createArray(FieldsStore.lines).map(() => {
-          return createArray(FieldsStore.lines).map(() => {
-            return {
-              active: flipCoin()
-            }
-          })
-        })
-      }
-    });
   }
 
   bind = () => {
