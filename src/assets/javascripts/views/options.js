@@ -8,7 +8,7 @@ import gameStore from '../store/game-store';
 export default class Options extends React.Component {
 
   state = {
-    fields: gameStore.all
+    fields: gameStore.data.fields
   }
 
   constructor(props) {

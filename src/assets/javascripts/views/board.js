@@ -7,7 +7,8 @@ import gameStore from '../store/game-store';
 export default class Board extends React.Component {
 
   state = {
-    fields: gameStore.all
+    fields: gameStore.data.fields,
+    game: gameStore.data.game,
   }
 
   constructor(props) {
@@ -21,7 +22,7 @@ export default class Board extends React.Component {
 
   onChange = () => {
     this.setState({
-      fields: gameStore.all
+      fields: gameStore.data.fields
     })
   }
 
@@ -29,6 +30,7 @@ export default class Board extends React.Component {
     return(
       <div className='c-board'>
         <h2>CALLBACK CODE</h2>
+        { this.state.game.lose && "you lose it :p" }
         <ul className='c-board__list c-inline-list'>
           {
             this.state.fields.map((row) => {

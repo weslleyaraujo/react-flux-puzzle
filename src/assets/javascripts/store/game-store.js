@@ -8,34 +8,14 @@ export default new class GameStore extends Events {
 
   constructor() {
     super();
-
-    this.all = createFields(this.data.game.lines, this.data.game.size);
+    this.prepare();
     this.bind();
   }
 
-  data = {
-    fields: [],
-    game: {
-      isPlaying: false,
-      lose: false,
-      level: 0,
-      wins: 0,
-      lines: 5,
-      size: 5,
-    }
+  data = {}
 
-  }
-
-  set all(value) {
-    return this.data.fields = value;
-  }
-
-  get all() {
-    return this.data.fields;
-  }
-
-  get nextGuess() {
-    return _(this.all)
+  get nextFieldGuess() {
+    return _(this.data.fields)
       .chain()
       .where({ isMatched: false })
       .first()
@@ -45,29 +25,52 @@ export default new class GameStore extends Events {
   bind = () => {
       appDispatcher.register((action) => {
         switch (action.actionType) {
-          case 'TRIAL': this.onActionTrial(action); break;
+          case 'TRIAL': this.actionHandler(this.onActionTrial, action); break;
         }
       });
+  }
+
+  prepare = () => {
+    this.data = {
+      fields: [],
+      game: {
+        isPlaying: false,
+        lose: false,
+        level: 0,
+        wins: 0,
+        lines: 5,
+        size: 5,
+      }
+    }
+
+    this.data.fields = createFields(this.data.game.lines, this.data.game.size);
+  }
+
+  actionHandler = (fn, action) => {
+    fn(action);
+    this.emitChange();
   }
 
   onActionTrial = (action) => {
     if (this.isMatched(action.id)) {
       this.setMatched();
+      // does the user win?
+      return;
     }
 
-    /*
-     * TODO: game over!
-     */
-    this.emitChange();
+    this.setGameOver();
+  }
 
+  setGameOver = () => {
+    this.data.game.lose = true;
   }
 
   setMatched = () => {
-    this.nextGuess.isMatched = true;
+    this.nextFieldGuess.isMatched = true;
   }
 
   isMatched = (id) => {
-    return this.nextGuess.id === id;
+    return this.nextFieldGuess.id === id;
   }
 
   addChangeListener = (callback) => {
