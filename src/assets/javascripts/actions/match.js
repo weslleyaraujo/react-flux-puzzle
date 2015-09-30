@@ -6,5 +6,11 @@ export default {
       actionType: 'TRIAL',
       id: row.id
     });
+  },
+
+  start: () => {
+    appDispatcher.dispatch({
+      actionType: 'START'
+    });
   }
 }

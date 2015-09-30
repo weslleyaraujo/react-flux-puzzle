@@ -8,16 +8,33 @@ import gameStore from '../store/game-store';
 export default class Options extends React.Component {
 
   state = {
-    fields: gameStore.data.fields
+    fields: gameStore.data.fields,
+    game: gameStore.data.game,
   }
 
   constructor(props) {
     super(props);
+    this.bind();
+  }
+
+  bind = () => {
+    gameStore.addChangeListener(this.onChange);
+  }
+
+  onChange = () => {
+    this.setState({
+      game: gameStore.data.game,
+    });
   }
 
   onFieldClick = (row, event) => {
     event.preventDefault();
     matchActions.trial(row);
+  }
+
+  onButtonClick = (event) => {
+    event.preventDefault();
+    matchActions.start();
   }
 
   render = () => {
@@ -35,6 +52,7 @@ export default class Options extends React.Component {
             })
           }
         </ul>
+        <button onClick={this.onButtonClick}>Start</button>
       </div>
     )
   }

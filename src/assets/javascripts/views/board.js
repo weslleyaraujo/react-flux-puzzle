@@ -22,8 +22,9 @@ export default class Board extends React.Component {
 
   onChange = () => {
     this.setState({
-      fields: gameStore.data.fields
-    })
+      fields: gameStore.data.fields,
+      game: gameStore.data.game,
+    });
   }
 
   render = () => {
@@ -45,6 +46,9 @@ export default class Board extends React.Component {
             })
           }
         </ul>
+
+        timer:
+        <p> { this.state.game.timer.minutes }:{ this.state.game.timer.seconds } </p>
       </div>
     )
   }
