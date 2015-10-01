@@ -1,18 +1,21 @@
-export default function (duration, fn) {
-  let minutes
-  let seconds;
+let humanize = (time) => time < 10 ? '0' + time : time;
+let getSeconds = (time) => humanize(parseInt(time / 60, 10));
+let getMinutes = (time) => humanize(parseInt(time % 60, 10));
 
-  let interval = setInterval(function () {
-    minutes = parseInt(duration / 60, 10);
-    seconds = parseInt(duration % 60, 10);
-
-    minutes = minutes < 10 ? '0' + minutes : minutes;
-    seconds = seconds < 10 ? '0' + seconds : seconds;
+export default function (duration, callback, onDone) {
+  let data = { minutes: 0, seconds: 0 };
+  let interval = setInterval(() => {
+    data.minutes = getSeconds(duration);
+    data.seconds = getMinutes(duration);
 
     if (--duration < 0) {
       clearInterval(interval);
-      fn();
+      onDone();
+      return;
     }
 
-  }, 1000);
+    callback.call(null, data);
+
+  }.bind(this), 1000);
 }
+

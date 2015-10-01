@@ -52,6 +52,7 @@ export default new class GameStore extends Events {
     }
 
     this.data.fields = createFields(this.data.game.lines, this.data.game.size);
+    this.data.options = _.shuffle(this.data.fields);
   }
 
   actionHandler = (fn, action) => {
@@ -62,29 +63,7 @@ export default new class GameStore extends Events {
   onActionStart = (action) => {
     this.prepare();
     this.data.game.isPlaying = true;
-
-    let minutes
-    let seconds;
-    let duration = 5 * 60;
-
-    let interval = setInterval(() => {
-
-      minutes = parseInt(duration / 60, 10);
-      seconds = parseInt(duration % 60, 10);
-
-      minutes = minutes < 10 ? '0' + minutes : minutes;
-      seconds = seconds < 10 ? '0' + seconds : seconds;
-
-      this.data.game.timer.minutes = minutes;
-      this.data.game.timer.seconds = seconds;
-      this.emitChange();
-
-      if (--duration < 0) {
-        clearInterval(interval);
-        fn();
-      }
-
-    }.bind(this), 1000);
+    // count ?
   }
 
   onActionTrial = (action) => {

@@ -1,5 +1,4 @@
 import React from 'react';
-import { shuffle } from 'underscore';
 
 import Field from './field';
 import matchActions from '../actions/match';
@@ -10,6 +9,7 @@ export default class Options extends React.Component {
   state = {
     fields: gameStore.data.fields,
     game: gameStore.data.game,
+    options: gameStore.data.options,
   }
 
   constructor(props) {
@@ -41,7 +41,7 @@ export default class Options extends React.Component {
     return (
       <div className='c-options'>
         <ul className='c-options__list c-inline-list'>
-          { shuffle(this.state.fields).map((row) => {
+          { this.state.options.map((row) => {
               return (
                   <li className='c-inline-list__item'>
                     <button className='c-options__button' onClick={this.onFieldClick.bind(this, row)}>
