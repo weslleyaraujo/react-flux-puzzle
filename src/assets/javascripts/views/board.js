@@ -31,7 +31,7 @@ export default class Board extends Component {
     return(
       <div className='c-board'>
         <h2>CALLBACK CODE</h2>
-        { this.state.game.lose && "you lose it :p" }
+        { this.state.game.status.lose && "you lose it :p" }
         <ul className='c-board__list c-inline-list'>
           {
             this.state.fields.map((row) => {

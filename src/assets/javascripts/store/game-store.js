@@ -39,12 +39,14 @@ export default new class GameStore extends Events {
     this.data = {
       fields: [],
       game: {
-        isPlaying: false,
         timer: {
           minutes: '00',
           seconds: '00'
         },
-        lose: false,
+        status: {
+          win: false,
+          lose: false
+        },
         level: 0,
         wins: 0,
         lines: 5,
@@ -83,11 +85,19 @@ export default new class GameStore extends Events {
   onActionTrial = (action) => {
     if (this.isMatched(action.id)) {
       this.setMatched();
-      // does the user win?
+      this.isWinner && this.setWinner();
       return;
     }
 
     this.setGameOver();
+  }
+
+  setWinner = () => {
+    this.data.game.wins++;
+  }
+
+  get isWinner() {
+    return !this.nextFieldGuess
   }
 
   setStart = () => {
@@ -95,7 +105,7 @@ export default new class GameStore extends Events {
   }
 
   setGameOver = () => {
-    this.data.game.lose = true;
+    this.data.game.status.lose = true;
     this.stopCountDown();
   }
 
