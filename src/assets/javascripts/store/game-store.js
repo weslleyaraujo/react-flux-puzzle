@@ -2,6 +2,7 @@ import _ from 'underscore';
 
 import appDispatcher from '../dispatcher/app-dispatcher';
 import createFields from '../helpers/create-fields';
+import countdown from '../helpers/countdown';
 import { EventEmitter as Events } from 'events';
 
 export default new class GameStore extends Events {
@@ -63,7 +64,12 @@ export default new class GameStore extends Events {
   onActionStart = (action) => {
     this.prepare();
     this.data.game.isPlaying = true;
-    // count ?
+    countdown(5 * 60, this.onCountDownChange, this.onCountDownDone);
+  }
+
+  onCountDownChange = (data) => {
+    this.data.game.timer = data;
+    this.emitChange();
   }
 
   onActionTrial = (action) => {
