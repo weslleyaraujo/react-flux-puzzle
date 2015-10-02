@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import cx from 'react/lib/cx';
 
 import Field from './field';
 import gameStore from '../store/game-store';
 
-export default class Board extends React.Component {
+export default class Board extends Component {
 
   state = {
     fields: gameStore.data.fields,

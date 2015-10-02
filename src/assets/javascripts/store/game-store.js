@@ -41,8 +41,8 @@ export default new class GameStore extends Events {
       game: {
         isPlaying: false,
         timer: {
-          minutes: 0,
-          seconds: 0
+          minutes: '00',
+          seconds: '00'
         },
         lose: false,
         level: 0,
@@ -64,7 +64,15 @@ export default new class GameStore extends Events {
   onActionStart = (action) => {
     this.prepare();
     this.data.game.isPlaying = true;
-    countdown(5 * 60, this.onCountDownChange, this.onCountDownDone);
+    this.countdown = countdown(10, this.onCountDownChange, this.onCountDownDone);
+  }
+
+  stopCountDown = () => {
+    this.countdown.stop();
+  }
+
+  onCountDownDone = () => {
+    this.setGameOver();
   }
 
   onCountDownChange = (data) => {
@@ -88,6 +96,7 @@ export default new class GameStore extends Events {
 
   setGameOver = () => {
     this.data.game.lose = true;
+    this.stopCountDown();
   }
 
   setMatched = () => {

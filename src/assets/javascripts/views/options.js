@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import Field from './field';
 import matchActions from '../actions/match';
 import gameStore from '../store/game-store';
 
-export default class Options extends React.Component {
+export default class Options extends Component {
 
   state = {
     fields: gameStore.data.fields,
@@ -24,6 +24,8 @@ export default class Options extends React.Component {
   onChange = () => {
     this.setState({
       game: gameStore.data.game,
+      options: gameStore.data.options,
+      fields: gameStore.data.fields,
     });
   }
 

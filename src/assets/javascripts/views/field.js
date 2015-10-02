@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import cx from 'react/lib/cx';
 
-export default class Field extends React.Component {
+export default class Field extends Component {
 
   constructor(props) {
     super(props);

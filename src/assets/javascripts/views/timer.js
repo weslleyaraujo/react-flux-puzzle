@@ -1,36 +1,32 @@
-import React from 'react';
+import React, { Component } from 'react';
+import gameStore from '../store/game-store';
 
-export default class Timer extends React.Component {
+export default class Timer extends Component {
 
   constructor(props) {
     super(props);
+    this.bind();
+  }
 
-    this.start();
+  bind = () => {
+    gameStore.addChangeListener(this.onChange);
   }
 
   state = {
-    size: this.props.size
+    game: gameStore.data.game
   }
 
-  static defaultProps = {
-    size: 1,
-    speed: 300
-  }
 
-  start = () => {
-    this.interval = setInterval(this.onInterval, this.props.speed);
-  }
-
-  onInterval = () => {
+  onChange = () => {
     this.setState({
-      size: this.state.size + 0.5
-    })
+      game: gameStore.data.game,
+    });
   }
 
   render = () => {
     return (
       <div className='c-timer'>
-        <div className='c-timer__bar' style={{ width: this.state.size + '%' }}></div>
+        <div className='c-timer__bar' style={{ width: this.state.game.timer.percentage + '%' }}></div>
       </div>
     )
   }
