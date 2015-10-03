@@ -18,6 +18,10 @@ export default new class GameStore extends Events {
 
   data = {}
 
+  get isGameOver() {
+    return this.data.game.status.lose;
+  }
+
   get nextFieldGuess() {
     return _(this.data.fields)
       .chain()
@@ -66,7 +70,7 @@ export default new class GameStore extends Events {
   onActionStart = (action) => {
     this.prepare();
     this.data.game.isPlaying = true;
-    this.countdown = countdown(10, this.onCountDownChange, this.onCountDownDone);
+    this.countdown = countdown(1 * 60, this.onCountDownChange, this.onCountDownDone);
   }
 
   stopCountDown = () => {
@@ -83,13 +87,15 @@ export default new class GameStore extends Events {
   }
 
   onActionTrial = (action) => {
+    if (this.isGameOver) return;
+
     if (this.isMatched(action.id)) {
       this.setMatched();
       this.isWinner && this.setWinner();
       return;
     }
 
-    this.setGameOver();
+    this.countdown.decrease(10);
   }
 
   setWinner = () => {
