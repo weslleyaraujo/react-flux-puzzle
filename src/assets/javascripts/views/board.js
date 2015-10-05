@@ -48,7 +48,7 @@ export default class Board extends Component {
         </ul>
 
         timer:
-        <p> { this.state.game.timer.minutes }:{ this.state.game.timer.seconds } </p>
+        <p> { this.state.game.timer.minutes }:{ this.state.game.timer.seconds }:{ this.state.game.timer.milliseconds } </p>
       </div>
     )
   }

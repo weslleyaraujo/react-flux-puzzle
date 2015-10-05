@@ -1,45 +1,38 @@
-import percentage from './percentage'
-import { clone } from 'underscore'
+import Stopwatch from 'timer-stopwatch';
+import moment from 'moment';
 
-let humanize = (time) => time < 10 ? '0' + time : time;
-let getMinutes = (time) => humanize(parseInt(time / 60, 10));
-let getSeconds = (time) => humanize(parseInt(time % 60, 10));
-let getData = (duration, initial) => {
+import percentage from './percentage';
+import pad from './pad';
+
+const decreaseSize = 1000 * 10;
+
+let getData = (ms, initial) => {
+  let time = moment.duration({
+    milliseconds: ms
+  });
+
   return {
-    minutes: getMinutes(duration),
-    seconds: getSeconds(duration),
-    percentage: percentage(duration, initial)
+    minutes: pad(time.minutes(), 2),
+    seconds: pad(time.seconds(), 2),
+    milliseconds: pad(time.milliseconds(), 3),
+    percentage: percentage(ms, initial),
   }
-}
+};
 
-console.log(clone)
-
-export default function (duration, callback, onDone) {
-  let data = {};
-  let interval;
+export default function (duration, onChange, onDone) {
   let initial = duration;
+  let timer = new Stopwatch(duration);
+  let data = getData(duration);
+  let emmit = (ms) => onChange.call(null, data = getData(ms, initial));
 
-  interval = setInterval(() => {
-
-    data = getData(duration, initial);
-
-    if (--duration < 0) {
-      clearInterval(interval);
-      callback.call(null, data);
-      onDone();
-      return;
-    }
-
-    callback.call(null, data);
-
-  }.bind(this), 1000);
+  timer.on('time', (x) => emmit(x.ms));
+  timer.start();
 
   return {
-    stop: () => clearInterval(interval),
+    stop: () => timer.stop(),
     decrease: (value) => {
-      duration = (duration < 0) ? 0 : (duration - value);
-      data = getData(duration, initial);
-      callback.call(null, data);
+      timer.reset(timer.ms - decreaseSize);
+      timer.start();
     }
   }
 }
