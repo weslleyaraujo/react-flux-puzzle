@@ -26,9 +26,10 @@ export default function (duration, onChange, onDone) {
   let emmit = (ms) => onChange.call(null, data = getData(ms, initial));
 
   timer.on('time', (x) => emmit(x.ms));
-  timer.start();
+  timer.on('done', onDone);
 
   return {
+    start: () => timer.start(),
     stop: () => timer.stop(),
     decrease: (value) => {
       timer.reset(timer.ms - decreaseSize);

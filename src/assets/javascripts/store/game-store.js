@@ -47,7 +47,8 @@ export default new class GameStore extends Events {
         timer: {
           minutes: '00',
           seconds: '00',
-          milliseconds: '000'
+          milliseconds: '000',
+          percentage: 100
         },
         status: {
           win: false,
@@ -58,10 +59,13 @@ export default new class GameStore extends Events {
         lines: 10,
         size: 5,
       }
+
+
     }
 
     this.data.fields = createFields(this.data.game.lines, this.data.game.size);
     this.data.options = _.shuffle(this.data.fields);
+    this.countdown = countdown(4000 * 10, this.onCountDownChange, this.onCountDownDone);
   }
 
   actionHandler = (fn, action) => {
@@ -72,7 +76,7 @@ export default new class GameStore extends Events {
   onActionStart = (action) => {
     this.prepare();
     this.data.game.isPlaying = true;
-    this.countdown = countdown(4000 * 10, this.onCountDownChange, this.onCountDownDone);
+    this.countdown.start();
   }
 
   stopCountDown = () => {
@@ -120,7 +124,6 @@ export default new class GameStore extends Events {
   setGameOver = () => {
     this.data.game.status.lose = true;
     this.stopCountDown();
-    alert('PERDEU');
   }
 
   setMatched = () => {
