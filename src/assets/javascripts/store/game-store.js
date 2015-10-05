@@ -56,7 +56,7 @@ export default new class GameStore extends Events {
         },
         level: 0,
         wins: 0,
-        lines: 10,
+        lines: 5,
         size: 5,
       }
 
