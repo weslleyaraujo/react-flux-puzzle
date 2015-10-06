@@ -34,6 +34,11 @@ export default function (duration, onChange, onDone) {
     decrease: (value) => {
       timer.reset(timer.ms - decreaseSize);
       timer.start();
+    },
+
+    add: (value) => {
+      timer.reset(timer.ms + decreaseSize);
+      timer.start();
     }
   }
 }

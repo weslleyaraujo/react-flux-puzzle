@@ -4,6 +4,7 @@ import moment from 'moment';
 import appDispatcher from '../dispatcher/app-dispatcher';
 import createFields from '../helpers/create-fields';
 import countdown from '../helpers/countdown';
+import getStoreSchema from '../helpers/get-store-schema';
 import { EventEmitter as Events } from 'events';
 
 export default new class GameStore extends Events {
@@ -17,13 +18,13 @@ export default new class GameStore extends Events {
     this.bind();
   }
 
-  data = {}
+  data = getStoreSchema()
 
   get isGameOver() {
     return this.data.game.status.lose;
   }
 
-  get nextFieldGuess() {
+  get headField() {
     return _(this.data.fields)
       .chain()
       .where({ isMatched: false })
@@ -41,36 +42,21 @@ export default new class GameStore extends Events {
   }
 
   prepare = () => {
-    this.data = {
-      fields: [],
-      game: {
-        timer: {
-          minutes: '00',
-          seconds: '00',
-          milliseconds: '000',
-          percentage: 100
-        },
-        status: {
-          win: false,
-          lose: false
-        },
-        level: 0,
-        wins: 0,
-        lines: 5,
-        size: 5,
-      }
-
-
-    }
-
-    this.data.fields = createFields(this.data.game.lines, this.data.game.size);
-    this.data.options = _.shuffle(this.data.fields);
+    // reset countdown it is enable
+    this.countdown && this.countdown.stop();
+    this.data = getStoreSchema();
+    this.rebuild();
     this.countdown = countdown(4000 * 10, this.onCountDownChange, this.onCountDownDone);
   }
 
   actionHandler = (fn, action) => {
     fn(action);
     this.emitChange();
+  }
+
+  rebuild = () => {
+    this.data.fields = createFields(this.data.game.lines, this.data.game.size);
+    this.data.options = _.shuffle(this.data.fields);
   }
 
   onActionStart = (action) => {
@@ -108,13 +94,23 @@ export default new class GameStore extends Events {
 
   setWinner = () => {
     this.data.game.wins++;
-    alert('win');
-    // remove it
-    this.stopCountDown();
+    this.increaseLevel();
+    this.increaseTime();
+    this.rebuild();
+    this.emitChange();
+  }
+
+  increaseTime = () => {
+    this.countdown.add(10);
+  }
+
+  increaseLevel = () => {
+    this.data.game.level++;
+    this.data.game.lines++;
   }
 
   get isWinner() {
-    return !this.nextFieldGuess
+    return !this.headField
   }
 
   setStart = () => {
@@ -127,11 +123,11 @@ export default new class GameStore extends Events {
   }
 
   setMatched = () => {
-    this.nextFieldGuess.isMatched = true;
+    this.headField.isMatched = true;
   }
 
   isMatched = (id) => {
-    return this.nextFieldGuess.id === id;
+    return this.headField.id === id;
   }
 
   addChangeListener = (callback) => {
