@@ -46,7 +46,7 @@ export default new class GameStore extends Events {
     this.countdown && this.countdown.stop();
     this.data = getStoreSchema();
     this.rebuild();
-    this.countdown = countdown(4000 * 10, this.onCountDownChange, this.onCountDownDone);
+    this.countdown = countdown(1000 * 10, this.onCountDownChange, this.onCountDownDone);
   }
 
   actionHandler = (fn, action) => {
@@ -86,6 +86,7 @@ export default new class GameStore extends Events {
     if (this.isMatched(action.id)) {
       this.setMatched();
       this.isWinner && this.setWinner();
+      this.countdown.add(2);
       return;
     }
 
@@ -101,7 +102,7 @@ export default new class GameStore extends Events {
   }
 
   increaseTime = () => {
-    this.countdown.add(10);
+    // this.countdown.add(10);
   }
 
   increaseLevel = () => {

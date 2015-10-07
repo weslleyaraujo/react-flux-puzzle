@@ -42,6 +42,7 @@ export default class Options extends Component {
   render = () => {
     return (
       <div className='c-options'>
+      LEVEL: {this.state.game.level}
         <ul className='c-options__list c-inline-list'>
           { this.state.options.map((row) => {
               return (

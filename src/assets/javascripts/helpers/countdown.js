@@ -4,7 +4,7 @@ import moment from 'moment';
 import percentage from './percentage';
 import pad from './pad';
 
-const decreaseSize = 1000 * 10;
+const decreaseSize = 1000 * 5;
 
 let getData = (ms, initial) => {
   let time = moment.duration({
@@ -37,7 +37,7 @@ export default function (duration, onChange, onDone) {
     },
 
     add: (value) => {
-      timer.reset(timer.ms + decreaseSize);
+      timer.reset(timer.ms + (value * 1000));
       timer.start();
     }
   }
