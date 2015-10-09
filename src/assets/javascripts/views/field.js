@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import cx from 'react/lib/cx';
+import classNames from 'classnames';
 
 export default class Field extends Component {
 
@@ -21,7 +21,7 @@ export default class Field extends Component {
             {
               row.map((line) => {
                 return (<td
-                  className={cx({
+                  className={classNames({
                     'c-field__item': true,
                     'is-active': line.active
                   })}

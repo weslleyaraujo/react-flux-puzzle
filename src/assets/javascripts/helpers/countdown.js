@@ -37,7 +37,9 @@ export default function (duration, onChange, onDone) {
     },
 
     add: (value) => {
-      timer.reset(timer.ms + (value * 1000));
+      value = value * 1000;
+      initial += value;
+      timer.reset(timer.ms + value);
       timer.start();
     }
   }

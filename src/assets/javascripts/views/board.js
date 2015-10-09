@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import cx from 'react/lib/cx';
+import classNames from 'classnames';
 
 import Field from './field';
 import gameStore from '../store/game-store';
@@ -30,13 +30,12 @@ export default class Board extends Component {
   render = () => {
     return(
       <div className='c-board'>
-        <h2>CALLBACK CODE</h2>
-        { this.state.game.status.lose && "you lose it :p" }
+        { this.state.game.status.lose && "GAME OVER!" }
         <ul className='c-board__list c-inline-list'>
           {
             this.state.fields.map((row) => {
               return (
-                  <li className={cx({
+                  <li className={classNames({
                       'c-inline-list__item c-board__item': true,
                       'is-matched': row.isMatched
                     })}>
@@ -46,8 +45,6 @@ export default class Board extends Component {
             })
           }
         </ul>
-
-        timer:
         <p> { this.state.game.timer.minutes }:{ this.state.game.timer.seconds }:{ this.state.game.timer.milliseconds } </p>
       </div>
     )

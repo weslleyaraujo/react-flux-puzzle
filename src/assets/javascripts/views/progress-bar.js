@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import gameStore from '../store/game-store';
 
-export default class Timer extends Component {
+export default class ProgressBar extends Component {
 
   constructor(props) {
     super(props);
@@ -25,8 +25,8 @@ export default class Timer extends Component {
 
   render = () => {
     return (
-      <div className='c-timer'>
-        <div className='c-timer__bar' style={{ width: this.state.game.timer.percentage + '%' }}></div>
+      <div className='c-progress-bar'>
+        <div className='c-progress-bar__bar' style={{ width: this.state.game.timer.percentage + '%' }}></div>
       </div>
     )
   }

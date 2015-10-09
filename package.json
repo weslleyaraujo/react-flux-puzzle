@@ -12,6 +12,7 @@
     "babelify": "^6.2.0",
     "browser-sync": "^2.8.2",
     "browserify": "^11.0.1",
+    "classnames": "^2.1.5",
     "css-mqpacker": "^3.1.0",
     "csswring": "^3.0.5",
     "dot-object": "^1.1.0",
