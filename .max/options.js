@@ -5,6 +5,10 @@ var config = yargs.config ? yargs.config : 'config-development.json';
 
 module.exports = {
   config: config,
+  fonts: {
+    src: 'src/assets/fonts/**',
+    dest: 'dist/assets/fonts/',
+  },
   src: {
     root: './',
     dest: 'dist',
