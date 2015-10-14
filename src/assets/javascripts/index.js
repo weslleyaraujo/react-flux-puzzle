@@ -1,14 +1,13 @@
 import React from 'react';
-import Board from './views/board';
-import Options from './views/options';
-import ProgressBar from './views/progress-bar';
-import Startup from './views/startup';
+import Startup from './components/startup';
+import Game from './components/game';
 
 class App extends React.Component {
   render = () => {
     return (
       <div className='c-flex-container'>
         <Startup />
+        <Game />
       </div>
     )
   }

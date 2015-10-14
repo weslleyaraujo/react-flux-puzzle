@@ -61,7 +61,8 @@ export default new class GameStore extends Events {
 
   onActionStart = (action) => {
     this.prepare();
-    this.data.game.isPlaying = true;
+
+    this.data.game.status.playing = true;
     this.countdown.start();
   }
 
@@ -120,6 +121,7 @@ export default new class GameStore extends Events {
 
   setGameOver = () => {
     this.data.game.status.lose = true;
+    this.data.game.status.playing = false;
     this.stopCountDown();
   }
 

@@ -12,7 +12,8 @@ export default function () {
       },
       status: {
         win: false,
-        lose: false
+        lose: false,
+        playing: false
       },
       level: 0,
       wins: 0,
