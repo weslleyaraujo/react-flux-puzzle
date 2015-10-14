@@ -32,7 +32,7 @@ export default class Game extends Component {
   render = () => {
     return (
       <div className='c-flex-container'>
-        { !this.state.game.status.playing && (
+        { this.state.game.status.playing && (
             <div className="c-flex-container">
                 <ProgressBar />
                 <Board />
