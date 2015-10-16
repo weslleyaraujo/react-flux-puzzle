@@ -115,10 +115,6 @@ export default new class GameStore extends Events {
     return !this.headField
   }
 
-  setStart = () => {
-    this.prepare();
-  }
-
   setGameOver = () => {
     this.data.game.status.lose = true;
     this.data.game.status.playing = false;
