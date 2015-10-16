@@ -1,9 +1,13 @@
-export default {
-  data: {},
+export default new class {
+  constructor() {
+    this.data = this.getSchema();
+  }
 
-  isGameOver: () => this.data.status.lose,
+  data = {}
 
-  getSchema: () => {
+  isGameOver = () => this.data.status.lose
+
+  getSchema = () => {
     return {
       level: 0,
       wins: 0,
@@ -15,13 +19,13 @@ export default {
         playing: false,
       },
     }
-  },
+  }
 
-  start: () => {
+  start = () => {
     this.data.status.playing = true;
-  },
+  }
 
-  setWinner: () => {
+  setWinner = () => {
     // why?
     this.data.wins++;
     this.data.level++;
@@ -30,12 +34,12 @@ export default {
     // should call fields.rebuild();
     // should call timer.increaseTime();
     // then emmitChange
-  },
+  }
 
-  setGameOver: () => {
+  setGameOver = () => {
     this.data.status.lose = true;
     this.data.status.playing = false;
     // should call timer.stopCountDown();
-  },
+  }
 
 }

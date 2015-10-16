@@ -7,6 +7,12 @@ import countdown from '../helpers/countdown';
 import getStoreSchema from '../helpers/get-store-schema';
 import { EventEmitter as Events } from 'events';
 
+import fieldsStore from './fields';
+import gameStore from './game';
+
+console.log(fieldsStore);
+console.log(gameStore);
+
 export default new class GameStore extends Events {
 
   constructor() {
