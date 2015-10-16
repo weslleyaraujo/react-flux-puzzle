@@ -1,9 +1,11 @@
+import fieldsStore from './fields';
+import timerStore from './timer';
+
 export default new class {
+
   constructor() {
     this.data = this.getSchema();
   }
-
-  data = {}
 
   isGameOver = () => this.data.status.lose
 
@@ -26,20 +28,38 @@ export default new class {
   }
 
   setWinner = () => {
-    // why?
+    // NOTE: rethink this
     this.data.wins++;
     this.data.level++;
     this.data.lines++;
+    fieldsStore.rebuild();
+    // timerStore.increaseTime();
 
-    // should call fields.rebuild();
-    // should call timer.increaseTime();
     // then emmitChange
   }
 
   setGameOver = () => {
     this.data.status.lose = true;
     this.data.status.playing = false;
-    // should call timer.stopCountDown();
+    timerStore.stop();
+  }
+
+  getDimentions = () => {
+    let { lines, size } = this.data;
+
+    return {
+      lines,
+      size
+    };
+  }
+
+  increaseLevel = () => {
+    this.data.game.level++;
+    this.data.game.lines++;
+  }
+
+  isWinner = () => {
+    return !this.getHead()
   }
 
 }

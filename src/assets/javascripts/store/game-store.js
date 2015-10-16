@@ -8,10 +8,8 @@ import getStoreSchema from '../helpers/get-store-schema';
 import { EventEmitter as Events } from 'events';
 
 import fieldsStore from './fields';
-import gameStore from './game';
-
-console.log(fieldsStore);
-console.log(gameStore);
+import userStore from './game';
+import timerStore from './timer';
 
 export default new class GameStore extends Events {
 
@@ -26,18 +24,6 @@ export default new class GameStore extends Events {
 
   data = getStoreSchema()
 
-  get isGameOver() {
-    return this.data.game.status.lose;
-  }
-
-  get headField() {
-    return _(this.data.fields)
-      .chain()
-      .where({ isMatched: false })
-      .first()
-      .value();
-  }
-
   bind = () => {
       appDispatcher.register((action) => {
         switch (action.actionType) {
@@ -48,11 +34,10 @@ export default new class GameStore extends Events {
   }
 
   prepare = () => {
-    // reset countdown it is enable
-    this.countdown && this.countdown.stop();
-    this.data = getStoreSchema();
-    this.rebuild();
-    this.countdown = countdown(1000 * 10, this.onCountDownChange, this.onCountDownDone);
+    timerStore.stop();
+    this.data = getStoreSchema(); // will be removed
+    fieldsStore.rebuild();
+    timerStore.start();
   }
 
   actionHandler = (fn, action) => {
@@ -60,79 +45,25 @@ export default new class GameStore extends Events {
     this.emitChange();
   }
 
-  rebuild = () => {
-    this.data.fields = createFields(this.data.game.lines, this.data.game.size);
-    this.data.options = _.shuffle(this.data.fields);
-  }
-
   onActionStart = (action) => {
     this.prepare();
-
-    this.data.game.status.playing = true;
-    this.countdown.start();
-  }
-
-  stopCountDown = () => {
-    this.countdown.stop();
-  }
-
-  onCountDownDone = () => {
-    this.setGameOver();
-  }
-
-  onCountDownChange = (data) => {
-    this.data.game.timer = data;
-    this.emitChange();
+    userStore.start();
+    timerStore.start();
   }
 
   onActionTrial = (action) => {
-    if (this.isGameOver) {
+    if (userStore.isGameOver()) {
       return;
     }
 
-    if (this.isMatched(action.id)) {
-      this.setMatched();
-      this.isWinner && this.setWinner();
-      this.countdown.add(2);
+    if (fieldsStore.isMatched(action.id)) {
+      userStore.setMatched();
+      userStore.isWinner && userStore.setWinner();
+      timerStore.countdown.add(2);
       return;
     }
 
-    this.countdown.decrease(10);
-  }
-
-  setWinner = () => {
-    this.data.game.wins++;
-    this.increaseLevel();
-    this.increaseTime();
-    this.rebuild();
-    this.emitChange();
-  }
-
-  increaseTime = () => {
-    // this.countdown.add(10);
-  }
-
-  increaseLevel = () => {
-    this.data.game.level++;
-    this.data.game.lines++;
-  }
-
-  get isWinner() {
-    return !this.headField
-  }
-
-  setGameOver = () => {
-    this.data.game.status.lose = true;
-    this.data.game.status.playing = false;
-    this.stopCountDown();
-  }
-
-  setMatched = () => {
-    this.headField.isMatched = true;
-  }
-
-  isMatched = (id) => {
-    return this.headField.id === id;
+    timerStore.countdown.decrease(10);
   }
 
   addChangeListener = (callback) => {
