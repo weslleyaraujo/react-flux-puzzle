@@ -34,11 +34,6 @@ export default class Options extends Component {
     matchActions.trial(row);
   }
 
-  onButtonClick = (event) => {
-    event.preventDefault();
-    matchActions.start();
-  }
-
   render = () => {
     return (
       <div className='c-options'>
@@ -55,7 +50,6 @@ export default class Options extends Component {
             })
           }
         </ul>
-        <button onClick={this.onButtonClick}>Start</button>
       </div>
     )
   }
