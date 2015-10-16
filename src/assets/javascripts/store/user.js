@@ -32,7 +32,7 @@ export default new class {
     this.data.wins++;
     this.data.level++;
     this.data.lines++;
-    fieldsStore.rebuild();
+    fieldsStore.rebuild(userStore.getDimensions());
     // timerStore.increaseTime();
 
     // then emmitChange
@@ -44,7 +44,7 @@ export default new class {
     timerStore.stop();
   }
 
-  getDimentions = () => {
+  getDimensions = () => {
     let { lines, size } = this.data;
 
     return {

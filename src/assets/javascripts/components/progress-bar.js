@@ -19,7 +19,7 @@ export default class ProgressBar extends Component {
 
   onChange = () => {
     this.setState({
-      game: gameStore.data.game,
+      game: gameStore.data,
     });
   }
 

@@ -1,6 +1,8 @@
 import createFields from '../helpers/create-fields';
 import _ from 'underscore';
 
+import userStore from './user';
+
 export default new class {
 
   data = {}
@@ -13,7 +15,12 @@ export default new class {
       .value();
   }
 
-  rebuild = (lines, size) => {
+  getData = () => {
+    return _.clone(this.data);
+  }
+
+  rebuild = (options) => {
+    let {lines, size} = userStore.getDimensions()
     this.data.fields = createFields(lines, size);
     this.data.options = _.shuffle(this.data.fields);
   }

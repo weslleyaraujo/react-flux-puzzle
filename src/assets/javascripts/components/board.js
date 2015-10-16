@@ -3,12 +3,13 @@ import classNames from 'classnames';
 
 import Field from './field';
 import gameStore from '../store/game-store';
+import fieldsStore from '../store/fields';
+import userStore from '../store/user';
 
 export default class Board extends Component {
 
   state = {
-    fields: gameStore.data.fields,
-    game: gameStore.data.game,
+    data: gameStore.data,
   }
 
   constructor(props) {
@@ -22,20 +23,19 @@ export default class Board extends Component {
 
   onChange = () => {
     this.setState({
-      fields: gameStore.data.fields,
-      game: gameStore.data.game,
+      data: gameStore.data,
     });
   }
 
   render = () => {
     return(
       <div className='c-board'>
-        { this.state.game.status.lose && "GAME OVER!" }
+        { this.state.data.status.lose && "GAME OVER!" }
         <ul className='c-board__list c-inline-list'>
           {
-            this.state.fields.map((row) => {
+            this.state.data.fields.map((row, index) => {
               return (
-                  <li className={classNames({
+                  <li key={index} className={classNames({
                       'c-inline-list__item c-board__item': true,
                       'is-matched': row.isMatched
                     })}>
@@ -45,7 +45,7 @@ export default class Board extends Component {
             })
           }
         </ul>
-        <p> { this.state.game.timer.minutes }:{ this.state.game.timer.seconds }:{ this.state.game.timer.milliseconds } </p>
+        <p> { this.state.data.timer.minutes }:{ this.state.data.timer.seconds }:{ this.state.data.timer.milliseconds } </p>
       </div>
     )
   }

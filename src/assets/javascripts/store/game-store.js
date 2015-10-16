@@ -4,25 +4,21 @@ import moment from 'moment';
 import appDispatcher from '../dispatcher/app-dispatcher';
 import createFields from '../helpers/create-fields';
 import countdown from '../helpers/countdown';
-import getStoreSchema from '../helpers/get-store-schema';
 import { EventEmitter as Events } from 'events';
 
 import fieldsStore from './fields';
-import userStore from './game';
+import userStore from './user';
 import timerStore from './timer';
 
 export default new class GameStore extends Events {
 
   constructor() {
     super();
-    /*
-     * TODO: rethink about prepare here
-     */
-    this.prepare();
+    this.data = this.getStoreSchema();
     this.bind();
   }
 
-  data = getStoreSchema()
+  data = {}
 
   bind = () => {
       appDispatcher.register((action) => {
@@ -35,9 +31,13 @@ export default new class GameStore extends Events {
 
   prepare = () => {
     timerStore.stop();
-    this.data = getStoreSchema(); // will be removed
+    this.data = this.getStoreSchema();
     fieldsStore.rebuild();
     timerStore.start();
+  }
+
+  getStoreSchema = () => {
+    return _.extend(fieldsStore.getData(), timerStore.data, userStore.data);
   }
 
   actionHandler = (fn, action) => {
@@ -58,7 +58,7 @@ export default new class GameStore extends Events {
 
     if (fieldsStore.isMatched(action.id)) {
       userStore.setMatched();
-      userStore.isWinner && userStore.setWinner();
+      userStore.isWinner() && userStore.setWinner();
       timerStore.countdown.add(2);
       return;
     }
@@ -70,11 +70,8 @@ export default new class GameStore extends Events {
     this.on('change', callback);
   }
 
-  removeChangeListener = (callback) => {
-    this.removeChangeListener('change', callback);
-  }
-
   emitChange = () => {
+    this.data = this.getStoreSchema();
     this.emit('change');
   }
 }

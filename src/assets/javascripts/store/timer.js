@@ -10,10 +10,12 @@ export default new class {
 
   getSchema = () => {
     return {
-      minutes: '00',
-      seconds: '00',
-      milliseconds: '000',
-      percentage: 100
+      timer: {
+        minutes: '00',
+        seconds: '00',
+        milliseconds: '000',
+        percentage: 100
+      }
     };
   }
 

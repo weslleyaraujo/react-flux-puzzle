@@ -8,8 +8,7 @@ import gameStore from '../store/game-store';
 export default class Game extends Component {
 
   state = {
-    fields: gameStore.data.fields,
-    game: gameStore.data.game,
+    data: gameStore.data,
   }
 
   constructor(props) {
@@ -23,18 +22,17 @@ export default class Game extends Component {
 
   onChange = () => {
     this.setState({
-      fields: gameStore.data.fields,
-      game: gameStore.data.game,
+      data: gameStore.data,
     });
   }
 
 
   render = () => {
+    // <ProgressBar />
     return (
       <div className='c-flex-container'>
-        { this.state.game.status.playing && (
+        { this.state.data.status.playing && (
             <div className="c-flex-container">
-                <ProgressBar />
                 <Board />
                 <Options />
             </div>

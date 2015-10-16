@@ -6,9 +6,7 @@ import gameStore from '../store/game-store';
 export default class Options extends Component {
 
   state = {
-    fields: gameStore.data.fields,
-    game: gameStore.data.game,
-    options: gameStore.data.options,
+    data: gameStore.data,
   }
 
   constructor(props) {
@@ -22,9 +20,7 @@ export default class Options extends Component {
 
   onChange = () => {
     this.setState({
-      game: gameStore.data.game,
-      options: gameStore.data.options,
-      fields: gameStore.data.fields,
+      data: gameStore.data,
     });
   }
 
@@ -36,7 +32,7 @@ export default class Options extends Component {
   render = () => {
     return (
       <div className="c-startup c-flex-container">
-        { !this.state.game.status.playing && (
+        { !this.state.data.status.playing && (
               <div className="c-startup__item">
                 <h1 className="c-title">React + Flux + Puzzle</h1>
                 <p>a experiment puzzle game built with react + flux structure</p>

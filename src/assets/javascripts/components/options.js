@@ -7,9 +7,7 @@ import gameStore from '../store/game-store';
 export default class Options extends Component {
 
   state = {
-    fields: gameStore.data.fields,
-    game: gameStore.data.game,
-    options: gameStore.data.options,
+    data: gameStore.data,
   }
 
   constructor(props) {
@@ -23,9 +21,7 @@ export default class Options extends Component {
 
   onChange = () => {
     this.setState({
-      game: gameStore.data.game,
-      options: gameStore.data.options,
-      fields: gameStore.data.fields,
+      data: gameStore.data,
     });
   }
 
@@ -35,11 +31,12 @@ export default class Options extends Component {
   }
 
   render = () => {
+    console.log(this.state);
     return (
       <div className='c-options'>
-      LEVEL: {this.state.game.level}
+      LEVEL: {this.state.data.level}
         <ul className='c-options__list c-inline-list'>
-          { this.state.options.map((row) => {
+          { this.state.data.options.map((row) => {
               return (
                   <li className='c-inline-list__item'>
                     <button className='c-options__button' onClick={this.onFieldClick.bind(this, row)}>
