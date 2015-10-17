@@ -33,11 +33,10 @@ export default new class GameStore extends Events {
     timerStore.stop();
     this.data = this.getStoreSchema();
     fieldsStore.rebuild();
-    timerStore.start();
   }
 
   getStoreSchema = () => {
-    return _.extend(fieldsStore.getData(), timerStore.data, userStore.data);
+    return _.extend(fieldsStore.data, timerStore.data, userStore.data);
   }
 
   actionHandler = (fn, action) => {
@@ -57,7 +56,7 @@ export default new class GameStore extends Events {
     }
 
     if (fieldsStore.isMatched(action.id)) {
-      userStore.setMatched();
+      fieldsStore.setMatched();
       userStore.isWinner() && userStore.setWinner();
       timerStore.countdown.add(2);
       return;

@@ -8,6 +8,8 @@ import userStore from '../store/user';
 
 export default class Board extends Component {
 
+  displayName: 'Board'
+
   state = {
     data: gameStore.data,
   }

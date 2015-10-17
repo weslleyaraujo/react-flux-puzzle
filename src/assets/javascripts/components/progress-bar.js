@@ -3,6 +3,8 @@ import gameStore from '../store/game-store';
 
 export default class ProgressBar extends Component {
 
+  displayName: 'ProgressBar'
+
   constructor(props) {
     super(props);
     this.bind();
@@ -26,7 +28,7 @@ export default class ProgressBar extends Component {
   render = () => {
     return (
       <div className='c-progress-bar'>
-        <div className='c-progress-bar__bar' style={{ width: this.state.game.timer.percentage + '%' }}></div>
+        <div className='c-progress-bar__bar' style={{ width: this.props.percentage + '%' }}></div>
       </div>
     )
   }

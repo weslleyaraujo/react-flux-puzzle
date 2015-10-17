@@ -15,10 +15,6 @@ export default new class {
       .value();
   }
 
-  getData = () => {
-    return _.clone(this.data);
-  }
-
   rebuild = (options) => {
     let {lines, size} = userStore.getDimensions()
     this.data.fields = createFields(lines, size);

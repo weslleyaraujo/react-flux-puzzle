@@ -7,6 +7,8 @@ import gameStore from '../store/game-store';
 
 export default class Game extends Component {
 
+  displayName: 'Game'
+
   state = {
     data: gameStore.data,
   }
@@ -26,14 +28,13 @@ export default class Game extends Component {
     });
   }
 
-
   render = () => {
-    // <ProgressBar />
     return (
       <div className='c-flex-container'>
         { this.state.data.status.playing && (
             <div className="c-flex-container">
                 <Board />
+                <ProgressBar percentage={this.state.data.timer.percentage} />
                 <Options />
             </div>
           )

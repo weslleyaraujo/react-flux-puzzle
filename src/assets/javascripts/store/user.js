@@ -32,7 +32,7 @@ export default new class {
     this.data.wins++;
     this.data.level++;
     this.data.lines++;
-    fieldsStore.rebuild(userStore.getDimensions());
+    fieldsStore.rebuild();
     // timerStore.increaseTime();
 
     // then emmitChange
@@ -59,7 +59,7 @@ export default new class {
   }
 
   isWinner = () => {
-    return !this.getHead()
+    return !fieldsStore.getHead()
   }
 
 }

@@ -6,6 +6,8 @@ import gameStore from '../store/game-store';
 
 export default class Options extends Component {
 
+  displayName: 'Options'
+
   state = {
     data: gameStore.data,
   }
@@ -31,14 +33,13 @@ export default class Options extends Component {
   }
 
   render = () => {
-    console.log(this.state);
     return (
       <div className='c-options'>
       LEVEL: {this.state.data.level}
         <ul className='c-options__list c-inline-list'>
-          { this.state.data.options.map((row) => {
+          { this.state.data.options.map((row, i) => {
               return (
-                  <li className='c-inline-list__item'>
+                  <li key={i} className='c-inline-list__item'>
                     <button className='c-options__button' onClick={this.onFieldClick.bind(this, row)}>
                       <Field row={row}/>
                     </button>

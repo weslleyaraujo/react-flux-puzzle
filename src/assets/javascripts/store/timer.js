@@ -1,5 +1,5 @@
 import countdown from '../helpers/countdown';
-import userStore from './timer';
+import userStore from './user';
 
 const INITIAL_TIME = 1000 * 10; // 10 SEC
 
@@ -21,6 +21,7 @@ export default new class {
 
   start = () => {
     this.countdown = countdown(INITIAL_TIME, this.onCountDownChange, this.onCountDownDone);
+    this.countdown.start();
   }
 
   stop = () => {
