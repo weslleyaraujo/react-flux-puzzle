@@ -14,7 +14,7 @@ export default new class GameStore extends Events {
 
   constructor() {
     super();
-    this.data = this.getStoreSchema();
+    this.data = this.getStoreData();
     this.bind();
   }
 
@@ -31,11 +31,11 @@ export default new class GameStore extends Events {
 
   prepare = () => {
     timerStore.stop();
-    this.data = this.getStoreSchema();
+    this.data = this.getStoreData();
     fieldsStore.rebuild();
   }
 
-  getStoreSchema = () => {
+  getStoreData = () => {
     return _.extend(fieldsStore.data, timerStore.data, userStore.data);
   }
 
@@ -47,7 +47,7 @@ export default new class GameStore extends Events {
   onActionStart = (action) => {
     this.prepare();
     userStore.start();
-    timerStore.start();
+    timerStore.start(this.emitChange);
   }
 
   onActionTrial = (action) => {
@@ -70,7 +70,7 @@ export default new class GameStore extends Events {
   }
 
   emitChange = () => {
-    this.data = this.getStoreSchema();
+    this.data = this.getStoreData();
     this.emit('change');
   }
 }

@@ -24,18 +24,16 @@ export default new class {
   }
 
   start = () => {
+    this.data = this.getSchema();
     this.data.status.playing = true;
   }
 
   setWinner = () => {
-    // NOTE: rethink this
     this.data.wins++;
     this.data.level++;
     this.data.lines++;
     fieldsStore.rebuild();
     // timerStore.increaseTime();
-
-    // then emmitChange
   }
 
   setGameOver = () => {

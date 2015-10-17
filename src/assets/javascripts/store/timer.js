@@ -19,7 +19,8 @@ export default new class {
     };
   }
 
-  start = () => {
+  start = (emmitChange) => {
+    this.emmitChange = emmitChange;
     this.countdown = countdown(INITIAL_TIME, this.onCountDownChange, this.onCountDownDone);
     this.countdown.start();
   }
@@ -28,14 +29,14 @@ export default new class {
     this.countdown && this.countdown.stop();
   }
 
-  onCountDownChange = (data) => {
-    this.data = data;
-    // should emit change
+  onCountDownChange = (timer) => {
+    this.data = { timer };
+    this.emmitChange && this.emmitChange();
   }
 
   onCountDownDone = () => {
     userStore.setGameOver();
-    // should emit change
+    this.emmitChange && this.emmitChange();
   }
 
   increaseTime = () => {

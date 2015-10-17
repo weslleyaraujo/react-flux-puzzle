@@ -7,22 +7,6 @@ export default class ProgressBar extends Component {
 
   constructor(props) {
     super(props);
-    this.bind();
-  }
-
-  bind = () => {
-    gameStore.addChangeListener(this.onChange);
-  }
-
-  state = {
-    game: gameStore.data.game
-  }
-
-
-  onChange = () => {
-    this.setState({
-      game: gameStore.data,
-    });
   }
 
   render = () => {
