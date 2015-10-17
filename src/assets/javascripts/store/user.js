@@ -33,7 +33,6 @@ export default new class {
     this.data.level++;
     this.data.lines++;
     fieldsStore.rebuild();
-    // timerStore.increaseTime();
   }
 
   setGameOver = () => {

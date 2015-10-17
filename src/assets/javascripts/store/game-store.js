@@ -1,11 +1,7 @@
 import _ from 'underscore';
-import moment from 'moment';
-
-import appDispatcher from '../dispatcher/app-dispatcher';
-import createFields from '../helpers/create-fields';
-import countdown from '../helpers/countdown';
 import { EventEmitter as Events } from 'events';
 
+import appDispatcher from '../dispatcher/app-dispatcher';
 import fieldsStore from './fields';
 import userStore from './user';
 import timerStore from './timer';
