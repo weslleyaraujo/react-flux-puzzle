@@ -6,6 +6,8 @@ const subjects = ['trial', 'start'].reduce((c, x) => {
 }, {});
 
 export default {
+  subjects,
+
   trial(row) {
     subjects.trial.onNext(row.id);
   },

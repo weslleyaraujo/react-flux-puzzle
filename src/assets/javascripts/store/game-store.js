@@ -1,9 +1,17 @@
 import Rx from 'rx';
 
+import matchActions from '../actions/match';
 import userStore from './user';
 
-let store = {fields:['example']}
+let store = {};
 let subject = new Rx.BehaviorSubject(store);
+
+matchActions.subjects.trial.subscribe((id) => {
+  console.log('action!', id);
+  subject.onNext(store);
+});
+
+window.x = matchActions;
 
 export default { subject };
 
