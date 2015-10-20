@@ -3,15 +3,26 @@ import Rx from 'rx';
 import matchActions from '../actions/match';
 import userStore from './user';
 
-let store = {};
-let subject = new Rx.BehaviorSubject(store);
+let store = {game: true};
+let gameSubject = new Rx.BehaviorSubject(store);
 
 matchActions.subjects.trial.subscribe((id) => {
-  console.log('action!', id);
-  subject.onNext(store);
+  gameSubject.onNext(store);
 });
 
-window.x = matchActions;
+Rx.Observable.combineLatest(
+    gameSubject,
+    userStore.subject,
+    (x, a) => {
+      return { x, a }
+    })
+    .subscribe((store) => {
+      console.log(store);
+    });
+
+// Rx.Observable.combineLatest(subject, userStore.subject, function (a, b) { console.log('lol', a, b);
+//   return { a: a, b: b }
+// }).subscribe(function (store) { console.log('exec', store); } )
 
 export default { subject };
 
