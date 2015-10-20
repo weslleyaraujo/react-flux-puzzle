@@ -1,17 +1,17 @@
+import Rx from 'rx';
 import React from 'react';
-import Startup from './components/startup';
-import Game from './components/game';
+import ReactDOM from 'react-dom';
 
-class App extends React.Component {
-  render = () => {
-    return (
-      <div className='c-flex-container'>
-        <Startup />
-        <Game />
-      </div>
-    )
-  }
-}
+import gameStore from './store/game-store';
+import userStore from './store/user';
+import App from './components/app';
 
 
-React.render(<App />, document.getElementById('app'));
+window.x = gameStore;
+window.y = userStore;
+window.Rx = Rx;
+
+gameStore.subject.subscribe((store) => {
+  console.log('from component', store);
+  ReactDOM.render(<App store={store} />, document.getElementById('app'));
+});

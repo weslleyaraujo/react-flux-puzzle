@@ -3,15 +3,15 @@
   "version": "0.0.0",
   "description": "",
   "main": "",
-  "scripts": {},
+  "scripts": {
+
+  },
   "author": "",
   "license": "MIT",
   "devDependencies": {
     "autoprefixer": "^5.2.0",
     "babel-eslint": "^4.1.1",
-    "babelify": "^6.2.0",
     "browser-sync": "^2.8.2",
-    "browserify": "^11.0.1",
     "classnames": "^2.1.5",
     "css-mqpacker": "^3.1.0",
     "csswring": "^3.0.5",
@@ -37,14 +37,15 @@
     "jshint-stylish": "^2.0.1",
     "lodash": "^0.9.2",
     "moment": "^2.10.6",
-    "react": "^0.13.3",
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0",
     "recursive-readdir-sync": "^1.0.6",
+    "rx": "^4.0.6",
     "through": "^2.3.8",
     "timer-stopwatch": "^0.1.6",
     "underscore": "^1.8.3",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
-    "watchify": "^3.3.1",
     "yargs": "^3.19.0"
   }
 }

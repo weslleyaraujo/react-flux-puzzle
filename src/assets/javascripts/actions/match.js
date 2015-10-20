@@ -1,16 +1,16 @@
-import appDispatcher from '../dispatcher/app-dispatcher';
+import Rx from 'rx';
+
+const subjects = ['trial', 'start'].reduce((c, x) => {
+  c[x] = new Rx.Subject();
+  return c;
+}, {});
 
 export default {
-  trial: (row) => {
-    appDispatcher.dispatch({
-      actionType: 'TRIAL',
-      id: row.id
-    });
+  trial(row) {
+    subjects.trial.onNext(row.id);
   },
 
-  start: () => {
-    appDispatcher.dispatch({
-      actionType: 'START'
-    });
+  start() {
+    subjects.start.onNext();
   }
 }

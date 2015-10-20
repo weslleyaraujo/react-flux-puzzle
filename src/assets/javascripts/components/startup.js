@@ -1,29 +1,13 @@
 import React, { Component } from 'react';
 
 import matchActions from '../actions/match';
-import gameStore from '../store/game-store';
 
 export default class StartUp extends Component {
 
   displayName: 'StartUp'
 
-  state = {
-    data: gameStore.data,
-  }
-
   constructor(props) {
     super(props);
-    this.bind();
-  }
-
-  bind = () => {
-    gameStore.addChangeListener(this.onChange);
-  }
-
-  onChange = () => {
-    this.setState({
-      data: gameStore.data,
-    });
   }
 
   onStartClick = (event) => {
