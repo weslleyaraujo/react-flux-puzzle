@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import gameStore from './store/game-store';
 import App from './components/app';
 
-gameStore.subject.subscribe((store) => {
+gameStore.subscribe((store) => {
   console.log('from component', store);
-  ReactDOM.render(<App store={store} />, document.getElementById('app'));
+  // ReactDOM.render(<App store={store} />, document.getElementById('app'));
 });

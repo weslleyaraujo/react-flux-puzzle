@@ -1,30 +1,28 @@
 import Rx from 'rx';
+import _ from 'underscore';
 
 import matchActions from '../actions/match';
 import userStore from './user';
+import fieldsStore from './fields';
 
 let store = {game: true};
 let gameSubject = new Rx.BehaviorSubject(store);
 
 matchActions.subjects.trial.subscribe((id) => {
+
+  let { status } = userStore.subject.getValue();
+  if (status.lose) {
+    return;
+  }
+
   gameSubject.onNext(store);
 });
 
-Rx.Observable.combineLatest(
+export default Rx.Observable.combineLatest(
     gameSubject,
     userStore.subject,
-    (x, a) => {
-      return { x, a }
-    })
-    .subscribe((store) => {
-      console.log(store);
-    });
-
-// Rx.Observable.combineLatest(subject, userStore.subject, function (a, b) { console.log('lol', a, b);
-//   return { a: a, b: b }
-// }).subscribe(function (store) { console.log('exec', store); } )
-
-export default { subject };
+    fieldsStore.subject,
+    (...data) => data.reduce((c, x) => c = _.extend(c, x), {}));
 
 // export default new class GameStore extends Events {
 //

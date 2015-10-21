@@ -1,7 +1,23 @@
-import createFields from '../helpers/create-fields';
-import _ from 'underscore';
+import Rx from 'rx';
+import { shuffle } from 'underscore';
 
+import createFields from '../helpers/create-fields';
 import userStore from './user';
+
+let getSchema = () => {
+  let { lines, size } = userStore.subject.getValue();
+  let fields = createFields(lines, size);
+
+  return {
+    fields,
+    options: shuffle(fields)
+  }
+};
+
+let store = getSchema();
+let subject = new Rx.BehaviorSubject(store);
+
+export default { subject };
 
 // export default new class {
 //
