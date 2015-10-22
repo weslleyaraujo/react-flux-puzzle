@@ -14,13 +14,15 @@ export function isMatched(store, id) {
 
 
 export function setMatched(store, id) {
+  let head = getHead(store);
+  // NOTE: fix me
   return store.set('missed', !isMatched(store, id)).set('fields', store.get('fields').map((f) => {
-    return f.set('isMatched', f.get('id') === id);
+    return f.set('isMatched', head.get('id') === id && id === f.get('id') ? true : f.get('isMatched'));
   }));
 }
 
 export function setTimer(store) {
-  return store.set('timer', store.get('missed') ? 'decrease': 'increase');
+  return store.set('thelpersimer', store.get('missed') ? 'decrease': 'increase');
 }
 
 export function isWinner(store) {

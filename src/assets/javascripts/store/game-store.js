@@ -23,18 +23,20 @@ let getSchema = (lines = 5, level = 0) => {
 let store = getSchema();
 let subject = new Rx.BehaviorSubject(store);
 
-// NOTE: action to clear flag time
-// NOTE: validate the level in time component to increase values whenever user wins
+// NOTE: action to clear flag time from timer component
+// NOTE: validate the level in time component to increase values
+//       whenever user wins (save a state flag in the component or something for it)
 
 matchActions.subjects.trial.subscribe((id) => {
-
   let result = compose(
     utils.setWinner,
     utils.setTimer,
     utils.setMatched
   );
 
+  console.log('before changes', store.toJSON());
   store = result(store, id);
+  console.log('after changes', store.toJSON());
   subject.onNext(store);
 });
 
