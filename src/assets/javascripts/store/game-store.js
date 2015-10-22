@@ -36,7 +36,6 @@ matchActions.subjects.trial.subscribe((id) => {
 
   console.log('before changes', store.toJSON());
   store = result(store, id);
-  console.log('after changes', store.toJSON());
   subject.onNext(store);
 });
 
