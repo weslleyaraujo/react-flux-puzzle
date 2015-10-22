@@ -4,7 +4,6 @@ import { shuffle } from 'underscore';
 import * as utils from '../helpers/store-utils';
 import createFields from '../helpers/create-fields';
 import matchActions from '../actions/match';
-import userStore from './user';
 
 const size = 5;
 
