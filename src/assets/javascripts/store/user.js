@@ -1,5 +1,8 @@
 import Rx from 'rx';
 
+import * as utils from '../helpers/store-utils';
+import matchActions from '../actions/match';
+
 let getSchema = () => {
   return {
     level: 0,
@@ -16,6 +19,18 @@ let getSchema = () => {
 
 let store = getSchema();
 let subject = new Rx.BehaviorSubject(store);
+
+// matchActions.subjects.trial.subscribe((id) => {
+//
+//   let { fields } = fieldsStore.subject.getValue();
+//
+//   if (utils.isWinner(fields)) {
+//     store = setWinner(store);
+//   }
+//
+//   subject.onNext(store);
+//
+// });
 
 export default { subject };
 

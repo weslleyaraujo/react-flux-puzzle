@@ -1,14 +1,17 @@
 import Rx from 'rx';
 import { shuffle } from 'underscore';
 
+import * as utils from '../helpers/store-utils';
 import createFields from '../helpers/create-fields';
+import matchActions from '../actions/match';
 import userStore from './user';
 
-let getSchema = () => {
-  let { lines, size } = userStore.subject.getValue();
-  let fields = createFields(lines, size);
+const size = 5;
 
+let getSchema = (lines = 5) => {
+  let fields = createFields(lines, size);
   return {
+    level: 0,
     fields,
     options: shuffle(fields)
   }
@@ -17,31 +20,24 @@ let getSchema = () => {
 let store = getSchema();
 let subject = new Rx.BehaviorSubject(store);
 
-export default { subject };
 
-// export default new class {
-//
-//   data = {}
-//
-//   getHead = () => {
-//     return _(this.data.fields)
-//       .chain()
-//       .where({ isMatched: false })
-//       .first()
-//       .value();
-//   }
-//
-//   rebuild = (options) => {
-//     let {lines, size} = userStore.getDimensions()
-//     this.data.fields = createFields(lines, size);
-//     this.data.options = _.shuffle(this.data.fields);
-//   }
-//
-//   setMatched = () => {
-//     this.getHead().isMatched = true;
-//   }
-//
-//   isMatched = (id) => {
-//     return this.getHead().id === id;
-//   }
-// }
+matchActions.subjects.trial.subscribe((id) => {
+  let head = utils.getHead(store.fields);
+
+  if (utils.isMatched(head, id)) {
+    store.fields = utils.setMatched(store.fields, id);
+  }
+
+  if (utils.isWinner(store.fields)) {
+    store.level++;
+    store.fields = createFields((size + store.level), size);
+    store.options = shuffle(store.fields);
+
+    console.log('point there!');
+  }
+
+  subject.onNext(store);
+
+});
+
+export default { subject };
