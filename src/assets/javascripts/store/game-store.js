@@ -23,10 +23,9 @@ let getSchema = (lines = 5, level = 0) => {
 let store = getSchema();
 let subject = new Rx.BehaviorSubject(store);
 
-// action to clear flag time
-// validate the level in time component to increase values whenever user wins
+// NOTE: action to clear flag time
+// NOTE: validate the level in time component to increase values whenever user wins
 
-window.store = store;
 matchActions.subjects.trial.subscribe((id) => {
 
   let result = compose(
@@ -35,12 +34,12 @@ matchActions.subjects.trial.subscribe((id) => {
     utils.setMatched
   );
 
-  console.log('before', store.toJSON());
-  console.log('after', result(store, id).toJSON());
-  // subject.onNext(result(store, id));
+  store = result(store, id);
+  subject.onNext(store);
 });
 
+// NOTE: just for test
 window.matchActions = matchActions;
-window.compose = compose;
+window.store = store;
 
 export default subject;
