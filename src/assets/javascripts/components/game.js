@@ -14,11 +14,11 @@ export default class Game extends Component {
 
   render = () => {
     return (
-      <div className='c-flex-container'>
+      <div>
         { this.props.store.get('status') === 'playing' && (
-            <div className="c-flex-container">
-                <Board fields={this.props.store.get('fields')} />
-                <Options options={this.props.store.get('options')} />
+            <div>
+              <Board fields={this.props.store.get('fields')} />
+              <Options options={this.props.store.get('options')} />
             </div>
           )
         }

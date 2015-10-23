@@ -17,7 +17,7 @@ export default class StartUp extends Component {
 
   render = () => {
     return (
-      <div className="c-startup c-flex-container">
+      <div>
         { this.props.store.get('status') === 'initial' && (
               <div className="c-startup__item">
                 <h1 className="c-title">React + Flux + Puzzle</h1>
