@@ -12,18 +12,20 @@ let subject = new Rx.BehaviorSubject(store);
 //       whenever user wins (save a state flag in the component or something for it)
 
 matchActions.subjects.trial.subscribe((id) => {
-  let result = compose(
+  let mixer = compose(
     utils.setWinner,
     utils.setTimer,
     utils.setMatched
   );
 
-  subject.onNext(storestore = result(store, id));
+  store = mixer(store, id);
+  subject.onNext(store);
 });
 
 matchActions.subjects.start.subscribe(() => {
-  let result = compose(utils.setPlaying);
-  subject.onNext(result(utils.getSchema()));
+  let mixer = compose(utils.setPlaying);
+  store = mixer(utils.getSchema());
+  subject.onNext(store);
 });
 
 export default subject;

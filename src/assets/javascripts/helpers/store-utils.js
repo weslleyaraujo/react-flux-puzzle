@@ -12,7 +12,7 @@ export function getSchema(lines = 5, level = 0) {
     missed: false,
     timer: 'default',
     status: 'initial',
-    options: shuffle(fields)
+    options: shuffle(fields.toJSON())
   });
 }
 
@@ -45,17 +45,20 @@ export function isWinner(store) {
   return !getHead(store);
 }
 
+
 export function setWinner(store) {
-  let level = store.get('level');
-  let timer = store.get('timer');
-  let winner = isWinner(store);
+  let level = store.get('level') + 1;
 
-  store.merge({
-    level: winner ? (level + 1) : level,
-    timer: winner ? 'upgrade' : timer
-  });
+  if (isWinner(store)) {
+    store = getSchema((level + SIZE), level);
 
-  return store.set('level', isWinner(store) ? (level + 1) : level);
+    return store.merge({
+      timer: 'upgrade',
+      status: 'playing'
+    });
+  }
+
+  return store;
 }
 
 export function setPlaying(store) {
