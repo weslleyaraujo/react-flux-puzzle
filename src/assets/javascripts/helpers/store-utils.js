@@ -1,5 +1,20 @@
 import createFields from '../helpers/create-fields';
+import { fromJS, Map } from 'immutable';
 import { shuffle } from 'underscore';
+
+const SIZE = 5;
+
+export function getSchema(lines = 5, level = 0) {
+  let fields = fromJS(createFields(lines, SIZE));
+  return Map({
+    level,
+    fields,
+    missed: false,
+    timer: 'default',
+    status: 'initial',
+    options: shuffle(fields)
+  });
+}
 
 export function getHead(store) {
   return store.get('fields')
@@ -42,3 +57,8 @@ export function setWinner(store) {
 
   return store.set('level', isWinner(store) ? (level + 1) : level);
 }
+
+export function setPlaying(store) {
+  return store.set('status', 'playing');
+}
+
