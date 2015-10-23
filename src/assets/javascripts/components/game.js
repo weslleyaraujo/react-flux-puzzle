@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import Board from './board';
 import Options from './options';
-// import ProgressBar from './progress-bar';
+import Timer from './timer';
 
 export default class Game extends Component {
 
@@ -13,11 +13,13 @@ export default class Game extends Component {
   }
 
   render = () => {
+    let { timer, status } = this.props.store.toJSON();
     return (
       <div>
         { this.props.store.get('status') === 'playing' && (
             <div>
               <Board fields={this.props.store.get('fields')} />
+              <Timer timer={timer} status={status}/>
               <Options options={this.props.store.get('options')} />
             </div>
           )

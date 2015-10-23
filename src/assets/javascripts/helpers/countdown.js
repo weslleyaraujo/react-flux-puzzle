@@ -31,17 +31,30 @@ export default function (duration, onChange, onDone) {
   return {
     start: () => timer.start(),
     stop: () => timer.stop(),
-    decrease: (value) => {
-      timer.reset(timer.ms - decreaseSize);
-      timer.start();
-    },
-
-    add: (value) => {
+    set: (value) => {
       value = value * 1000;
       initial += value;
-      timer.reset(timer.ms + value);
-      timer.start();
-    }
+      let total = timer.ms + value;
+      if (total <= 0) {
+        console.log('ae', value);
+        timer.startstop();
+        return;
+      }
+
+      timer.reset(total);
+
+    },
+    // decrease: (value) => {
+    //   timer.reset(timer.ms - decreaseSize);
+    //   timer.start();
+    // },
+
+    // add: (value) => {
+    //   value = value * 1000;
+    //   initial += value;
+    //   timer.reset(timer.ms + value);
+    //   timer.start();
+    // }
   }
 }
 
