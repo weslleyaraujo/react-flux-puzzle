@@ -18,6 +18,7 @@ export default class Field extends Component {
   render = () => {
     return (
       <table className='c-field'>
+        <tbody>
         { this.props.row.lines.map((row, i) => {
           return (<tr key={i} className='c-field__line'>
             {
@@ -34,6 +35,7 @@ export default class Field extends Component {
             }
           </tr>)
       }) }
+      </tbody>
     </table>
     )
   }

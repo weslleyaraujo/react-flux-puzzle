@@ -18,7 +18,7 @@ export default class StartUp extends Component {
   render = () => {
     return (
       <div className="c-startup c-flex-container">
-        { !this.state.data.status.playing && (
+        { this.props.store.get('status') === 'initial' && (
               <div className="c-startup__item">
                 <h1 className="c-title">React + Flux + Puzzle</h1>
                 <p>a experiment puzzle game built with react + flux structure</p>

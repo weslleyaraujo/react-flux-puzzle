@@ -2,40 +2,23 @@ import React, { Component } from 'react';
 
 import Board from './board';
 import Options from './options';
-import ProgressBar from './progress-bar';
-import gameStore from '../store/game-store';
+// import ProgressBar from './progress-bar';
 
 export default class Game extends Component {
 
   displayName: 'Game'
 
-  state = {
-    data: gameStore.data,
-  }
-
   constructor(props) {
     super(props);
-    this.bind();
-  }
-
-  bind = () => {
-    gameStore.addChangeListener(this.onChange);
-  }
-
-  onChange = () => {
-    this.setState({
-      data: gameStore.data,
-    });
   }
 
   render = () => {
     return (
       <div className='c-flex-container'>
-        { this.state.data.status.playing && (
+        { this.props.store.get('status') === 'playing' && (
             <div className="c-flex-container">
-                <Board />
-                <ProgressBar percentage={this.state.data.timer.percentage} />
-                <Options />
+                <Board fields={this.props.store.get('fields')} />
+                <Options options={this.props.store.get('options')} />
             </div>
           )
         }
