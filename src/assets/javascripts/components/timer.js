@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import countdown from '../helpers/countdown';
 import ProgressBar from './progress-bar';
+import matchActions from '../actions/match';
 
 const SECOND = 1000;
 const INITIAL_TIME = SECOND * 10;
@@ -28,7 +29,6 @@ export default class Timer extends Component {
   }
 
   componentWillMount = (a, b) => {
-    console.log('componentWillMount from Timer');
     this.countdown = countdown(INITIAL_TIME, ::this.onCountDownChange, ::this.onCountDownDone);
   }
 
@@ -41,13 +41,11 @@ export default class Timer extends Component {
   }
 
   onCountDownChange = (data) => {
-    this.setState(data)
+    this.setState(data);
   }
 
   onCountDownDone = (data) => {
-    console.log('onCountDownDone', data);
-    // action()
-    // this.setState...
+    matchActions.overtime();
   }
 
   render = () => {

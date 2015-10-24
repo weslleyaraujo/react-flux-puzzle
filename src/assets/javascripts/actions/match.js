@@ -1,6 +1,6 @@
 import Rx from 'rx';
 
-const subjects = ['trial', 'start'].reduce((c, x) => {
+const subjects = ['trial', 'start', 'overtime'].reduce((c, x) => {
   c[x] = new Rx.Subject();
   return c;
 }, {});
@@ -14,5 +14,9 @@ export default {
 
   start() {
     subjects.start.onNext();
-  }
+  },
+
+  overtime() {
+    subjects.overtime.onNext();
+  },
 }
