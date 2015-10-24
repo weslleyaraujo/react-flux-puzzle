@@ -1,30 +1,27 @@
 import React, { Component } from 'react';
-import { Map } from 'immutable';
 
 import countdown from '../helpers/countdown';
+import ProgressBar from './progress-bar';
 
-const INITIAL_TIME = 1000 * 10; // 10 SEC
+const SECOND = 1000;
+const INITIAL_TIME = SECOND * 10;
 
 export default class Timer extends Component {
 
   displayName: 'Timer'
 
-  rules = Map({
-    decrease: -10,
-    increase: 2,
-    upgrade: 10
-  })
-
-  state = {
-    timer: {
-      minutes: '00',
-      seconds: '00',
-      milliseconds: '000',
-      percentage: 100
-    }
+  rules = {
+    decrease: () => this.countdown.decrease(10),
+    increase: () => this.countdown.add(2),
+    upgrade: () => this.countdown.add(5)
   }
 
-  isPlaying = () => this.props.status === 'playing'
+  state = {
+    minutes: '00',
+    seconds: '00',
+    milliseconds: '000',
+    percentage: 100
+  }
 
   constructor(props) {
     super(props);
@@ -32,20 +29,19 @@ export default class Timer extends Component {
 
   componentWillMount = (a, b) => {
     console.log('componentWillMount from Timer');
-    this.state.countdown = countdown(INITIAL_TIME, this.onCountDownChange, this.onCountDownDone);
+    this.countdown = countdown(INITIAL_TIME, ::this.onCountDownChange, ::this.onCountDownDone);
   }
 
   componentDidMount = () => {
-    this.state.countdown.start();
+    this.countdown.start();
   }
 
   componentWillReceiveProps = (props) => {
-    this.state.countdown.set(this.rules.get(props.timer));
+    this.rules[props.timer]();
   }
 
   onCountDownChange = (data) => {
-    console.log('onCountDownChange', data);
-    // this.setState...
+    this.setState(data)
   }
 
   onCountDownDone = (data) => {
@@ -55,7 +51,13 @@ export default class Timer extends Component {
   }
 
   render = () => {
-    return <div></div>;
+    let { minutes, seconds, milliseconds, percentage } = this.state;
+    return (
+        <div>
+          <strong>{ minutes }:{ seconds }:{ milliseconds }</strong>
+          <ProgressBar percentage={ percentage } />
+        </div>
+    );
   }
 
 }

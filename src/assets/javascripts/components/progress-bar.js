@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import gameStore from '../store/game-store';
 
 export default class ProgressBar extends Component {
 
