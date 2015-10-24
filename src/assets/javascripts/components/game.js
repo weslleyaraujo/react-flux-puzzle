@@ -2,41 +2,25 @@ import React, { Component } from 'react';
 
 import Board from './board';
 import Options from './options';
-import ProgressBar from './progress-bar';
-import gameStore from '../store/game-store';
+import Timer from './timer';
 
 export default class Game extends Component {
 
-  state = {
-    fields: gameStore.data.fields,
-    game: gameStore.data.game,
-  }
+  displayName: 'Game'
 
   constructor(props) {
     super(props);
-    this.bind();
   }
-
-  bind = () => {
-    gameStore.addChangeListener(this.onChange);
-  }
-
-  onChange = () => {
-    this.setState({
-      fields: gameStore.data.fields,
-      game: gameStore.data.game,
-    });
-  }
-
 
   render = () => {
+    let { timer, status } = this.props.store.toJSON();
     return (
-      <div className='c-flex-container'>
-        { this.state.game.status.playing && (
-            <div className="c-flex-container">
-                <ProgressBar />
-                <Board />
-                <Options />
+      <div>
+        { this.props.store.get('status') === 'playing' && (
+            <div>
+              <Board fields={this.props.store.get('fields')} />
+              <Timer timer={timer} status={status}/>
+              <Options options={this.props.store.get('options')} />
             </div>
           )
         }

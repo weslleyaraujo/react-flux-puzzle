@@ -5,7 +5,7 @@ import flipCoin from '../helpers/flip-coin';
 export default function (size, lines) {
   return range(size).map(() => {
     return {
-      id: uniqueId(),
+      id: parseInt(uniqueId()),
       isMatched: false,
       lines: range(lines).map(() => {
         return range(lines).map(() => {

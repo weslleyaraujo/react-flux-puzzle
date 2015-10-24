@@ -1,17 +1,10 @@
+import Rx from 'rx';
 import React from 'react';
-import Startup from './components/startup';
-import Game from './components/game';
+import ReactDOM from 'react-dom';
 
-class App extends React.Component {
-  render = () => {
-    return (
-      <div className='c-flex-container'>
-        <Startup />
-        <Game />
-      </div>
-    )
-  }
-}
+import stateStore from './store/state-store';
+import App from './components/app';
 
-
-React.render(<App />, document.getElementById('app'));
+stateStore.subscribe((store) => {
+  ReactDOM.render(<App store={store} />, document.getElementById('app'));
+});

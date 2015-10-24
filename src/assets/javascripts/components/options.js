@@ -2,31 +2,14 @@ import React, { Component } from 'react';
 
 import Field from './field';
 import matchActions from '../actions/match';
-import gameStore from '../store/game-store';
 
 export default class Options extends Component {
 
-  state = {
-    fields: gameStore.data.fields,
-    game: gameStore.data.game,
-    options: gameStore.data.options,
-  }
+  displayName: 'Options'
+
 
   constructor(props) {
     super(props);
-    this.bind();
-  }
-
-  bind = () => {
-    gameStore.addChangeListener(this.onChange);
-  }
-
-  onChange = () => {
-    this.setState({
-      game: gameStore.data.game,
-      options: gameStore.data.options,
-      fields: gameStore.data.fields,
-    });
   }
 
   onFieldClick = (row, event) => {
@@ -37,11 +20,10 @@ export default class Options extends Component {
   render = () => {
     return (
       <div className='c-options'>
-      LEVEL: {this.state.game.level}
         <ul className='c-options__list c-inline-list'>
-          { this.state.options.map((row) => {
+          { this.props.options.map((row, i) => {
               return (
-                  <li className='c-inline-list__item'>
+                  <li key={i} className='c-inline-list__item'>
                     <button className='c-options__button' onClick={this.onFieldClick.bind(this, row)}>
                       <Field row={row}/>
                     </button>
