@@ -65,3 +65,6 @@ export function setPlaying(store) {
   return store.set('status', 'playing');
 }
 
+export function setGameOver(store) {
+  return store.set('status', 'gameover');
+}
