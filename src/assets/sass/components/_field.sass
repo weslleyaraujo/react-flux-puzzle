@@ -3,23 +3,23 @@
 // ***
 
 $component-name: 'c-field'
+$component-size: 13px
 
 .#{$component-name}
   margin: 0 auto
-  width: 50px
   display: inline-block
 
 .#{$component-name}__item
     display: inline-block
-    width: 10px
-    height: 10px
+    width: $component-size
+    height: $component-size
     background-color: $color-secondary
     &.is-active
-      background-color: $color-primary
+      background-color: $color-primary-dark
 
 .#{$component-name}__line
   padding: 0
-  height: 10px
+  height: $component-size
   display: block
   overflow: hidden
   line-height: 7px

@@ -51,7 +51,7 @@ export default class Timer extends Component {
   render = () => {
     let { minutes, seconds, milliseconds, percentage } = this.state;
     return (
-        <div>
+        <div className='c-timer'>
           <strong>{ minutes }:{ seconds }:{ milliseconds }</strong>
           <ProgressBar percentage={ percentage } />
         </div>
