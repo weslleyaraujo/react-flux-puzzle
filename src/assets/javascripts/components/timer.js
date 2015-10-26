@@ -45,14 +45,14 @@ export default class Timer extends Component {
   }
 
   onCountDownDone = (data) => {
-    matchActions.overtime();
+    // matchActions.overtime();
   }
 
   render = () => {
     let { minutes, seconds, milliseconds, percentage } = this.state;
     return (
         <div className='c-timer'>
-          <strong>{ minutes }:{ seconds }:{ milliseconds }</strong>
+          <strong className='c-timer__value'>{ minutes }:{ seconds }:{ milliseconds }</strong>
           <ProgressBar percentage={ percentage } />
         </div>
     );
