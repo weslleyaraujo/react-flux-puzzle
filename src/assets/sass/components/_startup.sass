@@ -8,12 +8,7 @@ $component-name: 'c-startup'
   font-size: $font-size-default
 
 .#{$component-name}__item
-  margin: auto
-  position: fixed
-  top: 50%
-  left: 50%
-  transform: translate(-50%, -50%)
-  text-align: center
+  @extend  %at-center
 
 .#{$component-name}__button
   width: 190px

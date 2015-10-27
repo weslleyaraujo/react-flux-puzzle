@@ -14,7 +14,7 @@ export default class Timer extends Component {
   rules = {
     decrease: () => this.countdown.decrease(10),
     increase: () => this.countdown.add(2),
-    upgrade: () => this.countdown.add(5)
+    upgrade: () => this.countdown.add(3)
   }
 
   state = {
