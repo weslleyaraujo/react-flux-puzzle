@@ -28,8 +28,8 @@ module.exports = function(gulp, globals) {
         globals.plugins.util.log(globals.plugins.util.colors.red(err.messageFormatted));
       }))
       .pipe(globals.plugins.postcss(processors))
+      .pipe(globals.utils.isDevelop() ? globals.plugins.browserSync.stream() : globals.plugins.util.noop())
       .pipe(globals.utils.isDevelop() ? globals.plugins.sourcemaps.write('.') : globals.plugins.util.noop())
-      .pipe(gulp.dest(globals.options.src.css))
-      .pipe(globals.utils.isDevelop() ? globals.plugins.browserSync.stream() : globals.plugins.util.noop());
+      .pipe(gulp.dest(globals.options.src.css));
   });
 };
