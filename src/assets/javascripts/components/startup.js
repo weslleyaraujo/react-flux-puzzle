@@ -10,11 +10,6 @@ export default class StartUp extends Component {
     super(props);
   }
 
-  onStartClick = (event) => {
-    event.preventDefault();
-    matchActions.start();
-  }
-
   render = () => {
     return (
       <div>
@@ -23,7 +18,7 @@ export default class StartUp extends Component {
                 <h1 className="c-title">React + Flux + Puzzle</h1>
                 <p>a experiment puzzle game built with react + flux structure</p>
                 <div className="c-startup__button">
-                  <button className="c-button" onClick={this.onStartClick}>Start</button>
+                  <button className="c-button" onClick={matchActions.start}>Start</button>
                 </div>
               </div>
           )
