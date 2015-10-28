@@ -27,13 +27,18 @@ export function isMatched(store, id) {
   return head ? head.get('id') === id : false;
 }
 
-
 export function setMatched(store, id) {
   let head = getHead(store);
   let matched = isMatched(store, id);
 
-  return store.set('missed', !matched).set('fields', store.get('fields').map((f) => {
-    return f.set('isMatched', f.get('id') === id && matched ? true : f.get('isMatched'));
+  store = store.set('missed', !matched);
+
+  if (!matched) {
+    return store;
+  }
+
+  return store.set('fields', store.get('fields').map(f => {
+    return f.set('isMatched', f.get('id') === id ? true : f.get('isMatched'));
   }));
 }
 
