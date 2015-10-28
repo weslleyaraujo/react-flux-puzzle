@@ -16,7 +16,7 @@ export default class GameOver extends Component {
       <div>
         { this.props.store.get('status') === 'gameover' && (
             <div className='c-game c-game--over'>
-              <h2 className="c-title c-game__title">GAME OVER!</h2>
+              <h2 className="c-title">GAME OVER!</h2>
               <p>You reached level: { level }</p>
               <div className="c-game__button">
                 <button className="c-button" onClick={matchActions.start}>Play again</button>
