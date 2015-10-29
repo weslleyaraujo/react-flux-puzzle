@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import classNames from 'classnames';
 
 import countdown from '../helpers/countdown';
 import ProgressBar from './progress-bar';
@@ -45,7 +46,7 @@ export default class Timer extends Component {
   }
 
   onCountDownDone = (data) => {
-    matchActions.overtime();
+    // matchActions.overtime();
   }
 
   render = () => {
@@ -53,7 +54,7 @@ export default class Timer extends Component {
     return (
         <div className='c-timer'>
           <strong className='c-timer__value'>{ minutes }:{ seconds }:{ milliseconds }</strong>
-          <ProgressBar percentage={ percentage } />
+          <ProgressBar percentage={ percentage } isEnding={ seconds <= 3 } />
         </div>
     );
   }

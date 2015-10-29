@@ -51,6 +51,17 @@ table
 
 html, body
   background-color: $color-primary
-  color: $color-dark
+  color: $color-primary-light
   height: 100%
   position: relative
+  z-index: 1
+  &:after
+    content: ''
+    left: 0
+    top: 0
+    z-index: -1
+    position: absolute
+    width: 100%
+    height: 100%
+    background-image: url(http://css4.com/wp-content/uploads/2013/10/pattern-generator.png)
+    opacity: 0.1

@@ -5,7 +5,7 @@
 $component-name: 'c-progress-bar'
 
 .#{$component-name}
-  background-color: #C83E37
+  background-color: $color-secondary-dark
   width: 100%
   top: 0
   left: 0
@@ -16,8 +16,13 @@ $component-name: 'c-progress-bar'
 
 
 .#{$component-name}__bar
-  background-color: #FFFB6C
+  background-color: $color-primary-light
   margin: 0 auto
-  height: 100%
+  height: 10px
   display: block
   transition: 0.2s
+  margin-top: 10px
+  box-shadow: 0 0 5px $color-secondary-light
+  &.is-ending
+    box-shadow: 0 0 5px #FF4B4B
+    background-color: #FA3838
