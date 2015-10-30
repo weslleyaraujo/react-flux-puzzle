@@ -15,7 +15,7 @@ export default class Game extends Component {
 
   render = () => {
     let { timer, status } = this.props.store.toJSON();
-    console.log(this.props.store.get('song'));
+    console.log('song:', this.props.store.get('song'));
     return (
       <div>
         { this.props.store.get('status') === 'playing' && (
