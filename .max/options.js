@@ -9,6 +9,10 @@ module.exports = {
     src: 'src/assets/fonts/**',
     dest: 'dist/assets/fonts/',
   },
+  sounds: {
+    src: 'src/assets/sounds/*',
+    dest: 'dist/assets/sounds/',
+  },
   src: {
     root: './',
     dest: 'dist',
