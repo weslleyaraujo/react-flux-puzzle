@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Sound from 'react-sound';
 
 import Board from './board';
 import Options from './options';
@@ -14,6 +15,7 @@ export default class Game extends Component {
 
   render = () => {
     let { timer, status } = this.props.store.toJSON();
+    console.log(this.props.store.get('song'));
     return (
       <div>
         { this.props.store.get('status') === 'playing' && (
