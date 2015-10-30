@@ -12,7 +12,7 @@ export function getSchema(lines = 5, level = 0) {
     missed: false,
     timer: 'default',
     status: 'initial',
-    song: '',
+    sound: '',
     options: shuffle(fields.toJSON())
   });
 }
@@ -61,7 +61,7 @@ export function setWinner(store) {
     return store.merge({
       timer: 'upgrade',
       status: 'playing',
-      song: 'winner'
+      sound: 'winner'
     });
   }
 
@@ -76,10 +76,10 @@ export function setGameOver(store) {
   return store.set('status', 'gameover');
 }
 
-export function setSong(store) {
+export function setSound(store) {
   if (store.get('status') === 'gameover') {
-    return store.set('song', 'gameover');
+    return store.set('sound', 'gameover');
   }
 
-  return store.set('song', store.get('missed') ? 'missed' : 'scored');
+  return store.set('sound', store.get('missed') ? 'missed' : 'scored');
 }
