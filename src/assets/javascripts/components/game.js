@@ -4,7 +4,7 @@ import Sound from 'react-sound';
 import Board from './board';
 import Options from './options';
 import Timer from './timer';
-import sounds from '../helpers/sounds';
+import getSound from '../helpers/get-sound';
 
 export default class Game extends Component {
 
@@ -16,7 +16,7 @@ export default class Game extends Component {
 
   render = () => {
     let { timer, status, sound } = this.props.store.toJSON();
-    console.log(Sound.status);
+    console.log(getSound(sound));
     return (
       <div>
         { this.props.store.get('status') === 'playing' && (
@@ -24,7 +24,7 @@ export default class Game extends Component {
               <Board fields={this.props.store.get('fields')} />
               <Timer timer={timer} status={status}/>
               <Options options={this.props.store.get('options')} />
-              { sound && <Sound url={sounds[sound]} playStatus={'PLAYING'} /> }
+              { sound && <Sound url={getSound(sound)} playStatus={Sound.status.PLAYING} /> }
             </div>
           )
         }
