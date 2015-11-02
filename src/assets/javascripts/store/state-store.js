@@ -10,6 +10,7 @@ let subject = new Rx.BehaviorSubject(store);
 matchActions.subjects.trial.subscribe((id) => {
   let mixer = compose(
     utils.setWinner,
+    utils.setSound,
     utils.setTimer,
     utils.setMatched
   );
@@ -25,7 +26,11 @@ matchActions.subjects.start.subscribe(() => {
 });
 
 matchActions.subjects.overtime.subscribe(() => {
-  let mixer = compose(utils.setGameOver);
+  let mixer = compose(
+      utils.setSound,
+      utils.setGameOver
+  );
+
   store = mixer(store);
   subject.onNext(store);
 });
