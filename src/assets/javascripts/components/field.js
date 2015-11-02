@@ -15,6 +15,11 @@ export default class Field extends Component {
     }
   }
 
+  shouldComponentUpdate = (props) => {
+    console.log(props, this.props, props.row != this.props);
+    return true;
+  }
+
   render = () => {
     return (
       <table className='c-field'>

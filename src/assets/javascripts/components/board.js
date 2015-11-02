@@ -11,6 +11,10 @@ export default class Board extends Component {
     super(props);
   }
 
+  shouldComponentUpdate = (props) => {
+    return this.props.fields !== props.fields;
+  }
+
   render = () => {
     return(
       <div className='c-board'>
