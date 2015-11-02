@@ -4,10 +4,6 @@ export default class Audio extends Component {
 
   displayName: 'Audio'
 
-  state = {
-    hasSong: false
-  }
-
   constructor(props) {
     super(props);
   }
