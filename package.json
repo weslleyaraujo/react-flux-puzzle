@@ -32,8 +32,6 @@
     "browserify": "^11.1.0",
     "classnames": "^2.1.5",
     "immutable": "^3.7.5",
-    "jquery": "^2.1.4",
-    "lodash": "^0.9.2",
     "moment": "^2.10.6",
     "node-sass": "^3.4.1",
     "node-static": "^0.7.7",
