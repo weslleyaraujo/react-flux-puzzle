@@ -3,11 +3,11 @@
   "version": "0.0.1",
   "description": "A puzzle game built with React + Rx.js + Immutable.js",
   "scripts": {
-    "build:css": "./node_modules/node-sass/bin/node-sass --output-style compressed src/assets/sass/main.sass > dist/assets/css/main.css",
-    "build:js": "./node_modules/browserify/bin/cmd.js src/assets/js/index.js | ./node_modules/uglify-js/bin/uglifyjs > dist/assets/js/index.js",
+    "build:css": "node-sass --output-style compressed src/assets/sass/main.sass > dist/assets/css/main.css",
+    "build:js": "browserify src/assets/js/index.js | uglifyjs > dist/assets/js/index.js",
     "server": "./node_modules/node-static/bin/cli.js -p 3000 .",
     "watch:css": "watchy -w src/assets/sass/ -- npm run build:css",
-    "watch:js": "./node_modules/watchify/bin/cmd.js src/assets/js/index.js -o dist/assets/js/index.js -v",
+    "watch:js": "watchify src/assets/js/index.js -o dist/assets/js/index.js -v",
     "watch": "npm run watch:css & npm run watch:js & npm run server"
   },
   "author": "Weslley Araujo <weslleyaraujo20@gmail.com>",
