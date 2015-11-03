@@ -3,7 +3,12 @@
   "version": "0.0.1",
   "description": "A puzzle game built with React + Rx.js + Immutable.js",
   "scripts": {
-    "watch": "./node_modules/watchify/bin/cmd.js src/assets/js/index.js -o dist/assets/js/index.js -v"
+    "build:css": "./node_modules/node-sass/bin/node-sass --output-style compressed src/assets/sass/main.sass > dist/assets/css/main.css",
+    "build:js": "./node_modules/browserify/bin/cmd.js src/assets/js/index.js | ./node_modules/uglify-js/bin/uglifyjs > dist/assets/js/index.js",
+    "server": "./node_modules/node-static/bin/cli.js -p 3000 .",
+    "watch:css": "watchy -w src/assets/sass/ -- npm run build:css",
+    "watch:js": "./node_modules/watchify/bin/cmd.js src/assets/js/index.js -o dist/assets/js/index.js -v",
+    "watch": "npm run watch:css & npm run watch:js & npm run server"
   },
   "author": "Weslley Araujo <weslleyaraujo20@gmail.com>",
   "license": "MIT",
@@ -23,18 +28,22 @@
     ]
   },
   "devDependencies": {
+    "babelify": "^6.3.0",
+    "browserify": "^11.1.0",
     "classnames": "^2.1.5",
     "immutable": "^3.7.5",
     "jquery": "^2.1.4",
     "lodash": "^0.9.2",
     "moment": "^2.10.6",
+    "node-sass": "^3.4.1",
+    "node-static": "^0.7.7",
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
     "rx": "^4.0.6",
     "timer-stopwatch": "^0.1.6",
+    "uglify-js": "^2.5.0",
     "underscore": "^1.8.3",
-    "babelify": "^6.3.0",
-    "browserify": "^11.1.0",
-    "watchify": "^3.4.0"
+    "watchify": "^3.4.0",
+    "watchy": "^0.6.5"
   }
 }
