@@ -42,4 +42,5 @@ node_modules
 
 ### Project ###
 .DS_Store
-dist
+dist/assets/css/*.css
+dist/assets/js/*.js
