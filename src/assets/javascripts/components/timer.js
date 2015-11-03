@@ -41,6 +41,10 @@ export default class Timer extends Component {
     this.rules[props.timer]();
   }
 
+  componentWillUnmount = () => {
+    this.countdown.stop();
+  }
+
   onCountDownChange = (data) => {
     this.setState(data);
   }
