@@ -16,8 +16,7 @@ export default class Field extends Component {
   }
 
   shouldComponentUpdate = (props) => {
-    console.log(props, this.props, props.row != this.props);
-    return true;
+    return props.row.isMatched !== this.props.isMatched;
   }
 
   render = () => {
