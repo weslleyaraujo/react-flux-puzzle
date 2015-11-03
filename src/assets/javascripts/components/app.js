@@ -5,6 +5,7 @@ import Game from './game';
 import GameOver from './game-over';
 
 export default class App extends Component {
+
   constructor(props) {
     super(props);
   }

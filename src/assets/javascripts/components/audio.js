@@ -12,6 +12,16 @@ export default class Audio extends Component {
     this.refs.player.play();
   }
 
+  shouldComponentUpdate = (props) => {
+    let shouldUpdate = this.props.sound !== props.sound;
+
+    if (!shouldUpdate) {
+      this.refs.player.play();
+    }
+
+    return shouldUpdate;
+  }
+
   render = () => {
     return (
         <div>

@@ -24,7 +24,7 @@ export default class Options extends Component {
           { this.props.options.map((row, i) => {
               return (
                   <li key={i} className='c-inline-list__item'>
-                    <button className='c-options__button' onClick={this.onFieldClick.bind(this, row)}>
+                    <button className='c-options__button' onClick={this.onFieldClick.bind(this, row.toJSON())}>
                       <Field row={row}/>
                     </button>
                   </li>

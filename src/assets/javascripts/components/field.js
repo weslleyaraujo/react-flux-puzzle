@@ -15,11 +15,15 @@ export default class Field extends Component {
     }
   }
 
+  shouldComponentUpdate = (props) => {
+    return this.props.row !== props.row;
+  }
+
   render = () => {
     return (
       <table className='c-field'>
         <tbody>
-        { this.props.row.lines.map((row, i) => {
+        { this.props.row.get('lines').map((row, i) => {
           return (<tr key={i} className='c-field__line'>
             {
               row.map((line, x) => {
@@ -27,7 +31,7 @@ export default class Field extends Component {
                   key={x}
                   className={classNames({
                     'c-field__item': true,
-                    'is-active': line.active
+                    'is-active': line.get('active')
                   })}
                 >
                 </td>)
