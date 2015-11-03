@@ -13,7 +13,7 @@ export function getSchema(lines = 5, level = 0) {
     timer: 'default',
     status: 'initial',
     sound: '',
-    options: shuffle(fields.toJSON())
+    options: fromJS(shuffle(fields.toJSON()))
   });
 }
 

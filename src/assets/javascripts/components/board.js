@@ -26,7 +26,7 @@ export default class Board extends Component {
                       'c-inline-list__item c-board__item': true,
                       'is-matched': row.get('isMatched')
                     })}>
-                    <Field row={row.toJSON()}/>
+                    <Field row={row}/>
                   </li>
                 )
             })
