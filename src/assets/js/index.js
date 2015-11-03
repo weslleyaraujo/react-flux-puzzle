@@ -8,3 +8,4 @@ import App from './components/app';
 stateStore.subscribe((store) => {
   ReactDOM.render(<App store={store} />, document.getElementById('app'));
 });
+
