@@ -4,6 +4,7 @@ import Startup from './startup';
 import Game from './game';
 import GameOver from './game-over';
 import Audio from './audio';
+import Analytics from './analytics';
 
 import getSound from '../helpers/get-sound';
 
@@ -16,6 +17,7 @@ export default class App extends Component {
   render() {
     return (
         <div>
+          <Analytics store={this.props.store} />
           <Startup store={this.props.store} />
           <Game store={this.props.store} />
           <GameOver store={this.props.store} />
