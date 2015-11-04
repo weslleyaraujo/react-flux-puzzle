@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 export HOSTNAME FILENAME BUILD_DIR
 
 HOSTNAME=http://weslleyaraujo.github.io/react-flux-puzzle
