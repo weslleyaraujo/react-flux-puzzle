@@ -8,9 +8,11 @@
     "server": "./node_modules/node-static/bin/cli.js -p 3000 .",
     "watch:css": "watchy -w src/assets/sass/ -- npm run build:css",
     "watch:js": "watchify src/assets/js/index.js -o dist/assets/js/index.js -v",
-    "watch": "npm run watch:css & npm run watch:js & npm run server"
+    "postcss": "postcss -c .postcss.json",
+    "start": "npm run watch:css & npm run watch:js & npm run server",
+    "build": "npm run build:js && npm run build:css && npm run postcss"
   },
-  "author": "Weslley Araujo <weslleyaraujo20@gmail.com>",
+  "author": "Weslley Araujo <weslleyaraujo19@gmail.com>",
   "license": "MIT",
   "keywords": [
     "React",
@@ -28,6 +30,7 @@
     ]
   },
   "devDependencies": {
+    "autoprefixer": "^6.0.3",
     "babelify": "^6.3.0",
     "browserify": "^11.1.0",
     "classnames": "^2.1.5",
@@ -35,6 +38,7 @@
     "moment": "^2.10.6",
     "node-sass": "^3.4.1",
     "node-static": "^0.7.7",
+    "postcss-cli": "^2.3.2",
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
     "rx": "^4.0.6",
