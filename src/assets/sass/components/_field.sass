@@ -17,11 +17,16 @@ $component-size: 13px
     box-shadow: -15px 5px 45px #0f0
     &.is-active
       background-color: $color-primary-dark
+    +media('mobile')
+      width: $component-size / 2
+      height: $component-size / 2
 
 .#{$component-name}__line
   padding: 0
   height: $component-size
   display: block
   overflow: hidden
-  line-height: 7px
-
+  line-height: $component-size / 2
+  +media('mobile')
+    line-height: 0
+    height: $component-size / 2

@@ -3,9 +3,14 @@
 // ***
 
 $component-name: 'c-title'
+$component-size: 64px
 
 .#{$component-name}
-  font-size: 64px
+  font-size: $component-size
+  +media('mobile')
+    font-size: $component-size / 2
 
 .#{$component-name}--secondary
-  font-size: 32px
+  font-size: $component-size / 2
+  +media('mobile')
+    font-size: $component-size / 2
