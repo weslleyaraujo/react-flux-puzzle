@@ -6,7 +6,7 @@ An experiment built with React + Rx + Immutable.js and the awesome Flux structur
 
 ## The reason
 
-I started this project with the intuite to apply some technologies that I have been studying in the last few months..
+I started this project with the intuit to apply some technologies that I have been studying in the last few months..
 this is the real first app that I wrote using stuff such as [Rx.js](http://reactivex.io/), [React](https://facebook.github.io/react/) and [Immutable.js](https://facebook.github.io/immutable-js/),
 so please, I would love to get some feedback to improve my code 😀
 
