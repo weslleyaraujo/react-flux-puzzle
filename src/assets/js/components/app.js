@@ -4,6 +4,7 @@ import Startup from './startup';
 import Game from './game';
 import GameOver from './game-over';
 import Audio from './audio';
+
 import getSound from '../helpers/get-sound';
 
 export default class App extends Component {
