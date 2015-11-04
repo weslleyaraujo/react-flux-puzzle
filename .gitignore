@@ -44,3 +44,4 @@ node_modules
 .DS_Store
 dist/assets/css/*.css
 dist/assets/js/*.js
+dist/index.html
