@@ -16,7 +16,7 @@ export default class StartUp extends Component {
         { this.props.store.get('status') === 'initial' && (
               <div className="c-startup__item">
                 <h1 className="c-title">React + Flux + Puzzle</h1>
-                <p>a experiment puzzle game built with react + flux structure</p>
+                <p>an experiment built with React + Rx + Immutable.js and the awesome Flux structure</p>
                 <div className="c-startup__button">
                   <button className="c-button" onClick={matchActions.start}>Start</button>
                 </div>
