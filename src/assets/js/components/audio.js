@@ -30,7 +30,7 @@ export default class Audio extends Component {
     return (
         <div>
           {this.props.sounds.map((sound) =>
-            <audio preload="auto" ref={sound} src={sound} key={sound}></audio>
+            <audio preload='auto' ref={sound} src={sound} key={sound}></audio>
           )}
         </div>
     );
