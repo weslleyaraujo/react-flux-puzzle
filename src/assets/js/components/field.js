@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
+import drawSquare from '../helpers/draw-square';
 
 export default class Field extends Component {
 
@@ -10,6 +11,11 @@ export default class Field extends Component {
   }
 
   static defaultProps = {
+    pixel: 10,
+    colors: {
+      active: '#92E56C',
+      inactive: '#1D3507',
+    },
     row: {
       lines: []
     }
@@ -19,28 +25,18 @@ export default class Field extends Component {
     return this.props.row !== props.row;
   }
 
+  componentDidMount() {
+    let canvas = this.refs.container;
+    let {pixel, row, colors} = this.props;
+
+    drawSquare({pixel, canvas, row, colors});
+  }
+
   render = () => {
+    let size = this.props.pixel * this.props.row.get('lines').size;
+
     return (
-      <table className='c-field'>
-        <tbody>
-        { this.props.row.get('lines').map((row, i) => {
-          return (<tr key={i} className='c-field__line'>
-            {
-              row.map((line, x) => {
-                return (<td
-                  key={x}
-                  className={classNames({
-                    'c-field__item': true,
-                    'is-active': line.get('active')
-                  })}
-                >
-                </td>)
-              })
-            }
-          </tr>)
-      }) }
-      </tbody>
-    </table>
-    )
+      <canvas ref='container' width={size} height={size}></canvas>
+    );
   }
 }
