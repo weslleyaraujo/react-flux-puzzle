@@ -8,15 +8,19 @@ export default class Audio extends Component {
     super(props);
   }
 
+  playSound = () => {
+    this.props.play && this.refs[this.props.play].play();
+  }
+
   componentDidUpdate = () => {
-    this.refs.player.play();
+    this.playSound();
   }
 
   shouldComponentUpdate = (props) => {
-    let shouldUpdate = this.props.sound !== props.sound;
+    let shouldUpdate = this.props.play !== props.play;
 
     if (!shouldUpdate) {
-      this.refs.player.play();
+      this.playSound()
     }
 
     return shouldUpdate;
@@ -25,7 +29,9 @@ export default class Audio extends Component {
   render = () => {
     return (
         <div>
-          <audio ref='player' src={this.props.sound}></audio>
+          {this.props.sounds.map((sound) =>
+            <audio preload="auto" ref={sound} src={sound} key={sound}></audio>
+          )}
         </div>
     );
   }

@@ -5,6 +5,11 @@ const sounds = {
   winner: '/dist/assets/sounds/winner.wav',
 }
 
+let soundsSrc = [];
+for (let src in sounds) {
+  soundsSrc.push(sounds[src]);
+}
+
 let getSound = (x) => sounds[x];
 
-export default getSound;
+export { getSound, soundsSrc };

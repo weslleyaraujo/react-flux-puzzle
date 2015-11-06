@@ -50,7 +50,7 @@ export default class Timer extends Component {
   }
 
   onCountDownDone = (data) => {
-    matchActions.overtime();
+    //matchActions.overtime();
   }
 
   render = () => {
