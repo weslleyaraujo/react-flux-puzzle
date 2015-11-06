@@ -6,7 +6,7 @@ import GameOver from './game-over';
 import Audio from './audio';
 import Analytics from './analytics';
 
-import getSound from '../helpers/get-sound';
+import { getSound, soundsSrc } from '../helpers/get-sound';
 
 export default class App extends Component {
 
@@ -21,7 +21,7 @@ export default class App extends Component {
           <Startup store={this.props.store} />
           <Game store={this.props.store} />
           <GameOver store={this.props.store} />
-          <Audio sound={getSound(this.props.store.get('sound'))} />
+          <Audio play={getSound(this.props.store.get('sound'))} sounds={soundsSrc} />
         </div>
     )
   }

@@ -1,3 +1,5 @@
+import { values } from 'underscore';
+
 const sounds = {
   gameover: '/dist/assets/sounds/game-over.wav',
   missed: '/dist/assets/sounds/error.wav',
@@ -5,6 +7,8 @@ const sounds = {
   winner: '/dist/assets/sounds/winner.wav',
 }
 
+const soundsSrc = values(sounds);
+
 let getSound = (x) => sounds[x];
 
-export default getSound;
+export { getSound, soundsSrc };
