@@ -26,14 +26,14 @@ export default class Field extends Component {
   }
 
   componentDidMount() {
-    let canvas = this.refs.container;
-    let {pixel, row, colors} = this.props;
+    const canvas = this.refs.container;
+    const {pixel, row, colors} = this.props;
 
     drawSquare({pixel, canvas, row, colors});
   }
 
   render = () => {
-    let size = this.props.pixel * this.props.row.get('lines').size;
+    const size = this.props.pixel * this.props.row.get('lines').size;
 
     return (
       <canvas ref='container' width={size} height={size}></canvas>
