@@ -4,6 +4,7 @@
   "description": "A puzzle game built with React + Rx.js + Immutable.js",
   "scripts": {
     "test": "NODE_ENV=test mocha --compilers js:babel-core/register --recursive",
+    "test:cov": "NODE_ENV=test babel-istanbul cover -v _mocha -- -R",
     "build:css": "node-sass --output-style compressed src/assets/sass/main.sass > dist/assets/css/main.css",
     "build:js": "browserify src/assets/js/index.js | uglifyjs > dist/assets/js/index.js",
     "server": "./node_modules/node-static/bin/cli.js -p 3000 .",
@@ -40,6 +41,8 @@
     "chai": "^3.4.0",
     "classnames": "^2.1.5",
     "immutable": "^3.7.5",
+    "isparta": "^3.5.3",
+    "istanbul": "^0.4.0",
     "mocha": "^2.3.3",
     "moment": "^2.10.6",
     "node-sass": "^3.4.1",
