@@ -15,7 +15,7 @@ describe('pad', () => {
     expect(value[0]).to.equal('0');
   });
 
-  it('returns a pad value the first value as the argument passed',() => {
+  it('returns a pad value with the first character as the argument passed',() => {
     let value = pad(1, 2, 'F');
     expect(value[0]).to.equal('F');
   });
