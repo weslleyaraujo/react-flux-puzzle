@@ -10,13 +10,13 @@ describe('store-utils', () => {
   });
 
   describe('getSchema', () => {
-    it('should return default the store store', () => {
+    it('should return default the store schema', () => {
       expect(store.get('fields').toJSON()).to.be.a('array');
       expect(store.get('options').toJSON()).to.be.a('array');
       expect(store.get('options').first().get('lines').size).to.equal(5);
     });
 
-    it('should return the store store with the numbers arguments itens', () => {
+    it('should return the store with the "options" field with the same size as the arguments passed', () => {
       const SIZE = 10;
       store = utils.getSchema(10);
       expect(store.get('options').size).to.equal(SIZE);
@@ -24,7 +24,7 @@ describe('store-utils', () => {
   });
 
   describe('getHead', () => {
-    it('should get the first item of the fields', () => {
+    it('should get the first item unmatched of the fields', () => {
       let head = utils.getHead(store);
       expect(head).to.equal(store.get('fields').first());
     });
