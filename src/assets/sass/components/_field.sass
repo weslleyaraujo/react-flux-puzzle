@@ -6,27 +6,7 @@ $component-name: 'c-field'
 $component-size: 13px
 
 .#{$component-name}
-  margin: 0 auto
-  display: inline-block
-
-.#{$component-name}__item
-    display: inline-block
-    width: $component-size
-    height: $component-size
-    background-color: $color-secondary // #97e381
-    box-shadow: -15px 5px 45px #0f0
-    &.is-active
-      background-color: $color-primary-dark
-    +media('mobile')
-      width: $component-size / 2
-      height: $component-size / 2
-
-.#{$component-name}__line
-  padding: 0
-  height: $component-size
-  display: block
-  overflow: hidden
-  line-height: $component-size / 2
+  margin: 0 5px
   +media('mobile')
-    line-height: 0
-    height: $component-size / 2
+    margin: 0
+    transform: scale(0.75)
