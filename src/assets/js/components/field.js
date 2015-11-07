@@ -33,10 +33,13 @@ export default class Field extends Component {
   }
 
   render = () => {
-    const size = this.props.pixel * this.props.row.get('lines').size;
+    const { pixel, row } = this.props;
+    const size = pixel * row.get('lines').size;
 
     return (
-      <canvas ref='container' width={size} height={size}></canvas>
+      <div className='c-field'>
+        <canvas ref='container' width={size} height={size}></canvas>
+      </div>
     );
   }
 }
