@@ -9,6 +9,12 @@ const sounds = {
 
 const soundsSrc = values(sounds);
 
-let getSound = (x) => sounds[x];
+let getSound = (x) => {
+  if (sounds[x]) {
+    return sounds[x];
+  }
 
-export { getSound, soundsSrc };
+  throw new Error(`Cant find sound named ${x}.`);
+}
+
+export { getSound, soundsSrc, sounds };
