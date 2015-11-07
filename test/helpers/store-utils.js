@@ -3,7 +3,7 @@ import * as utils from '../../src/assets/js/helpers/store-utils'
 
 let store;
 
-describe('store utils', () => {
+describe('store-utils', () => {
 
   beforeEach(() => {
     store = utils.getSchema();
