@@ -13,3 +13,9 @@ $component-name: 'c-startup'
 .#{$component-name}__button
   width: 190px
   margin: 20px auto
+  +media('mobile')
+    width: 100%
+    margin: 40px auto
+    > .c-button
+      width: 90%
+      padding: 40px 30px
