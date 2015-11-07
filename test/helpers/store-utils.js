@@ -48,6 +48,73 @@ describe('store utils', () => {
     });
   });
 
+  describe('setMatched', () => {
+    it('set the field with the passed id as matched', () => {
+      let firstId = store.get('fields').first().get('id');
+      store = utils.setMatched(store, firstId);
+      expect(store.get('fields').first().get('isMatched')).to.be.true;
+      expect(store.get('fields').get(1).get('isMatched')).to.be.false;
+    });
+  });
+
+  describe('setTimer', () => {
+    it('set timer to "increase" if the flag "missed" is set to false', () => {
+      store = utils.setTimer(store);
+      expect(store.get('timer')).to.equal('increase');
+    });
+
+    it('set timer to "decrease" if the flag "missed" is set to true', () => {
+      store = store.set('missed', true);
+      store = utils.setTimer(store);
+      expect(store.get('timer')).to.equal('decrease');
+    });
+  });
+
+  describe('isWinner', () => {
+    it('returns true if all the fields are set with the flag "isMatched" as true', () => {
+      let fields  = store.get('fields').map(x => x.set('isMatched', true));
+      store = store.set('fields', fields);
+      expect(utils.isWinner(store)).to.be.true;
+    });
+
+    it('returns false if any of the fields are set with the flag "isMatched" as false', () => {
+      expect(utils.isWinner(store)).to.be.false;
+    });
+  });
+
+  describe('setPlaying', () => {
+    it('set the status to "playing"', () => {
+      store = utils.setPlaying(store);
+      expect(store.get('status')).to.equal('playing');
+    });
+  });
+
+  describe('setGameOver', () => {
+    it('set the status to "gameover"', () => {
+      store = utils.setGameOver(store);
+      expect(store.get('status')).to.equal('gameover');
+    });
+  });
+
+  describe('setSound', () => {
+    it('set the sound to "gameover" if the status is also "gameover"', () => {
+      store = utils.setGameOver(store);
+      store = utils.setSound(store);
+      expect(store.get('sound')).to.equal('gameover');
+    });
+
+    it('set the sound to "missed" if the flag missed is setted to true', () => {
+      store = store.set('missed', true);
+      store = utils.setSound(store);
+      expect(store.get('sound')).to.equal('missed');
+    });
+
+    it('set the sound to "scored" if the flag missed is setted to false', () => {
+      store = store.set('missed', false);
+      store = utils.setSound(store);
+      expect(store.get('sound')).to.equal('scored');
+    });
+  });
 
 });
 
