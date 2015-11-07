@@ -6,42 +6,57 @@ import pad from './pad';
 
 const decreaseSize = 1000 * 5;
 
-let getData = (ms, initial) => {
-  let time = moment.duration({
-    milliseconds: ms
-  });
-
-  return {
-    minutes: pad(time.minutes(), 2),
-    seconds: pad(time.seconds(), 2),
-    milliseconds: pad(time.milliseconds(), 3),
-    percentage: percentage(ms, initial),
+export class Countdown {
+  constructor(options) {
+    this.options = options;
+    this.prepare();
+    this.bind();
   }
-};
 
-export default function (duration, onChange, onDone) {
-  let initial = duration;
-  let timer = new Stopwatch(duration);
-  let data = getData(duration);
-  let emmit = (ms) => onChange.call(null, data = getData(ms, initial));
+  getData(ms, initial) {
+    let time = moment.duration({
+      milliseconds: ms
+    });
 
-  timer.on('time', (x) => emmit(x.ms));
-  timer.on('done', onDone);
-
-  return {
-    start: () => timer.start(),
-    stop: () => timer.stop(),
-    decrease: (value) => {
-      timer.reset(timer.ms - decreaseSize);
-      timer.start();
-    },
-
-    add: (value) => {
-      value = value * 1000;
-      initial += value;
-      timer.reset(timer.ms + value);
-      timer.start();
+    return {
+      minutes: pad(time.minutes(), 2),
+      seconds: pad(time.seconds(), 2),
+      milliseconds: pad(time.milliseconds(), 3),
+      percentage: percentage(ms, initial),
     }
   }
-}
 
+  prepare() {
+    this.timer = new Stopwatch(this.options.duration);
+    this.data = this.getData(this.options.duration);
+  }
+
+  bind() {
+    this.timer.on('time', (x) => {
+      this.data = this.getData(x.ms, this.options.duration);
+      this.options.onChange.call(null, this.data);
+    });
+
+    this.timer.on('done', this.options.onDone);
+  }
+
+  start() {
+    this.timer.start();
+  }
+
+  stop() {
+    this.timer.stop();
+  }
+
+  decrease(value) {
+    this.timer.reset(this.timer.ms - decreaseSize);
+    this.start();
+  }
+
+  add(value) {
+    value = value * 1000;
+    this.options.duration += value;
+    this.timer.reset(this.timer.ms + value);
+    this.timer.start();
+  }
+}
