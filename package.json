@@ -10,6 +10,7 @@
     "server": "./node_modules/node-static/bin/cli.js -p 3000 .",
     "watch:css": "watchy -w src/assets/sass/ -- npm run build:css",
     "watch:js": "watchify src/assets/js/index.js -o dist/assets/js/index.js -v",
+    "watch:test": "NODE_ENV=test mocha --compilers js:babel-core/register --recursive --watch",
     "postcss": "postcss -c .postcss.json",
     "start": "npm run watch:css & npm run watch:js & npm run server",
     "build": "npm run build:js && npm run build:css && npm run postcss",
