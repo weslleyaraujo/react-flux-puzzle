@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
 
-import { Countdown } from '../helpers/countdown';
+import Countdown from '../helpers/countdown';
 import ProgressBar from './progress-bar';
 import matchActions from '../actions/match';
 
@@ -30,7 +30,11 @@ export default class Timer extends Component {
   }
 
   componentWillMount = (a, b) => {
-    this.countdown = new Countdown({ duration: INITIAL_TIME, onChange: ::this.onCountDownChange, onDone: ::this.onCountDownDone });
+    this.countdown = new Countdown({
+      duration: INITIAL_TIME,
+      onChange: ::this.onCountDownChange,
+      onDone: ::this.onCountDownDone
+    });
   }
 
   componentDidMount = () => {

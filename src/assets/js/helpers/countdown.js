@@ -6,7 +6,7 @@ import pad from './pad';
 
 const decreaseSize = 1000 * 5;
 
-export class Countdown {
+export default class Countdown {
   constructor(options) {
     this.options = options;
     this.prepare();
