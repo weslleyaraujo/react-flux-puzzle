@@ -12,7 +12,7 @@ const matchActions = {
       return;
     }
 
-    throw new Error('trial action cant be dispactched required parameter id.');
+    throw new Error('trial action cant be dispactched, parameter "id" was not set');
   },
 
   start() {
