@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import Field from './field';
-import matchActions from '../actions/match';
+import { matchActions } from '../actions/match';
 
 export default class Options extends Component {
 

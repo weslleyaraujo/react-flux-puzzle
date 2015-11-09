@@ -3,7 +3,7 @@ import classNames from 'classnames';
 
 import Countdown from '../helpers/countdown';
 import ProgressBar from './progress-bar';
-import matchActions from '../actions/match';
+import { matchActions } from '../actions/match';
 
 const SECOND = 1000;
 const INITIAL_TIME = SECOND * 10;
