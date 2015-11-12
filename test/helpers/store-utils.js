@@ -1,5 +1,5 @@
 import { expect, assert } from 'chai';
-import * as utils from '../../src/assets/js/helpers/store-utils'
+import * as utils from '../../src/assets/js/helpers/store-utils';
 
 let store;
 
