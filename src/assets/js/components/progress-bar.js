@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
 
-export default class ProgressBar extends Component {
+class ProgressBar extends Component {
 
   displayName: 'ProgressBar'
 
@@ -9,7 +9,7 @@ export default class ProgressBar extends Component {
     super(props);
   }
 
-  render = () => {
+  render() {
     return (
       <div className='c-progress-bar'>
         <div className={classNames({
@@ -20,3 +20,5 @@ export default class ProgressBar extends Component {
     )
   }
 }
+
+export default ProgressBar;

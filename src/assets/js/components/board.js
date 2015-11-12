@@ -3,7 +3,7 @@ import classNames from 'classnames';
 
 import Field from './field';
 
-export default class Board extends Component {
+class Board extends Component {
 
   displayName: 'Board'
 
@@ -11,11 +11,11 @@ export default class Board extends Component {
     super(props);
   }
 
-  shouldComponentUpdate = (props) => {
+  shouldComponentUpdate(props) {
     return this.props.fields !== props.fields;
   }
 
-  render = () => {
+  render() {
     return(
       <div className='c-board'>
         <ul className='c-board__list c-inline-list'>
@@ -36,3 +36,5 @@ export default class Board extends Component {
     )
   }
 }
+
+export default Board;

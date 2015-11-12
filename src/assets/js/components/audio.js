@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default class Audio extends Component {
+class Audio extends Component {
 
   displayName: 'Audio'
 
@@ -8,15 +8,15 @@ export default class Audio extends Component {
     super(props);
   }
 
-  playSound = () => {
+  playSound() {
     this.props.play && this.refs[this.props.play].play();
   }
 
-  componentDidUpdate = () => {
+  componentDidUpdate() {
     this.playSound();
   }
 
-  shouldComponentUpdate = (props) => {
+  shouldComponentUpdate(props) {
     let shouldUpdate = this.props.play !== props.play;
 
     if (!shouldUpdate) {
@@ -26,7 +26,7 @@ export default class Audio extends Component {
     return shouldUpdate;
   }
 
-  render = () => {
+  render() {
     return (
         <div>
           {this.props.sounds.map((sound) =>
@@ -36,3 +36,5 @@ export default class Audio extends Component {
     );
   }
 }
+
+export default Audio;

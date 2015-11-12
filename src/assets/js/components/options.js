@@ -3,21 +3,20 @@ import React, { Component } from 'react';
 import Field from './field';
 import { matchActions } from '../actions/match';
 
-export default class Options extends Component {
+class Options extends Component {
 
   displayName: 'Options'
-
 
   constructor(props) {
     super(props);
   }
 
-  onFieldClick = (row, event) => {
+  onFieldClick(row, event) {
     event.preventDefault();
     matchActions.trial(row);
   }
 
-  render = () => {
+  render() {
     return (
       <div className='c-options'>
         <ul className='c-options__list c-inline-list'>
@@ -36,3 +35,5 @@ export default class Options extends Component {
     )
   }
 }
+
+export default Options;

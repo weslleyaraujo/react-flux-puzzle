@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { matchActions } from '../actions/match';
 
-export default class StartUp extends Component {
+class StartUp extends Component {
 
   displayName: 'StartUp'
 
@@ -10,7 +10,7 @@ export default class StartUp extends Component {
     super(props);
   }
 
-  render = () => {
+  render() {
     return (
       <div>
         { this.props.store.get('status') === 'initial' && (
@@ -28,3 +28,5 @@ export default class StartUp extends Component {
   }
 
 }
+
+export default StartUp;

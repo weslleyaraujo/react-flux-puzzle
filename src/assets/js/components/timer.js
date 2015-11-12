@@ -8,7 +8,7 @@ import { matchActions } from '../actions/match';
 const SECOND = 1000;
 const INITIAL_TIME = SECOND * 10;
 
-export default class Timer extends Component {
+class Timer extends Component {
 
   displayName: 'Timer'
 
@@ -68,3 +68,5 @@ export default class Timer extends Component {
   }
 
 }
+
+export default Timer;

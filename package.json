@@ -6,7 +6,7 @@
     "test": "NODE_ENV=test mocha --compilers js:babel-core/register --recursive",
     "test:cov": "NODE_ENV=test istanbul cover _mocha -- --require babel-core/register --recursive",
     "build:css": "node-sass --output-style compressed src/assets/sass/main.sass > dist/assets/css/main.css",
-    "build:js": "browserify src/assets/js/index.js | uglifyjs > dist/assets/js/index.js",
+    "build:js": "browserify src/assets/js/index.js -t [ babelify ] | uglifyjs > dist/assets/js/index.js",
     "server": "./node_modules/node-static/bin/cli.js -p 3000 .",
     "watch:css": "watchy -w src/assets/sass/ -- npm run build:css",
     "watch:js": "watchify src/assets/js/index.js -o dist/assets/js/index.js -v",
@@ -25,19 +25,16 @@
   ],
   "browserify": {
     "transform": [
-      [
-        "babelify",
-        {
-          "optional": "es7"
-        }
-      ]
+      "babelify"
     ]
   },
   "devDependencies": {
     "autoprefixer": "^6.0.3",
     "babel-core": "^6.1.2",
     "babel-preset-es2015": "^6.1.2",
-    "babelify": "^6.3.0",
+    "babel-preset-react": "^6.1.4",
+    "babel-preset-stage-0": "^6.1.2",
+    "babelify": "^7.2.0",
     "browserify": "^11.1.0",
     "chai": "^3.4.0",
     "classnames": "^2.1.5",

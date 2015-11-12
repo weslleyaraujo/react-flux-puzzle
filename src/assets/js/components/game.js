@@ -5,7 +5,7 @@ import Options from './options';
 import Timer from './timer';
 import Audio from './audio';
 
-export default class Game extends Component {
+class Game extends Component {
 
   displayName: 'Game'
 
@@ -13,7 +13,7 @@ export default class Game extends Component {
     super(props);
   }
 
-  render = () => {
+  render() {
     let { timer, status } = this.props.store.toJSON();
     return (
       <div>
@@ -29,3 +29,5 @@ export default class Game extends Component {
     )
   }
 }
+
+export default Game;
