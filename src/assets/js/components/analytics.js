@@ -16,7 +16,11 @@ class Analytics extends Component {
   }
 
   track(name, label, value) {
-    window.ga && window.ga('send', 'event', name, label, value);
+    // NOTE: just adding all conditions cause when I'm running
+    // specs window is a undefined var :(
+    if (typeof window !== 'undefined') {
+      window.ga && window.ga('send', 'event', name, label, value);
+    }
   }
 
   render() {
