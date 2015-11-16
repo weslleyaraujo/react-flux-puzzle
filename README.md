@@ -1,4 +1,4 @@
-# React Flux Puzzle
+# React Flux Puzzle [![Build Status](https://travis-ci.org/weslleyaraujo/react-flux-puzzle.svg?branch=master)](https://travis-ci.org/weslleyaraujo/react-flux-puzzle) [![Coverage Status](https://coveralls.io/repos/weslleyaraujo/react-flux-puzzle/badge.svg?branch=master&service=github)](https://coveralls.io/github/weslleyaraujo/react-flux-puzzle?branch=master)
 
 An experiment built with React + Rx + Immutable.js and the awesome Flux structure 🍃
 
