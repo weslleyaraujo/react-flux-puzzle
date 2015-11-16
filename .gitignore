@@ -45,3 +45,4 @@ node_modules
 dist/assets/css/*.css
 dist/assets/js/*.js
 dist/index.html
+coverage/
