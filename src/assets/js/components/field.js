@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
 
-export default class Field extends Component {
+class Field extends Component {
 
   displayName: 'Field'
 
@@ -44,3 +44,5 @@ export default class Field extends Component {
     )
   }
 }
+
+export default Field;

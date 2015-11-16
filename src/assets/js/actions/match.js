@@ -1,22 +1,27 @@
 import Rx from 'rx';
 
-const subjects = ['trial', 'start', 'overtime'].reduce((c, x) => {
+const matchSubjects = ['trial', 'start', 'overtime'].reduce((c, x) => {
   c[x] = new Rx.Subject();
   return c;
 }, {});
 
-export default {
-  subjects,
+const matchActions = {
+  trial({ id }) {
+    if (id) {
+      matchSubjects.trial.onNext(id);
+      return;
+    }
 
-  trial(row) {
-    subjects.trial.onNext(row.id);
+    throw new Error('trial action cant be dispactched, parameter "id" was not set');
   },
 
   start() {
-    subjects.start.onNext();
+    matchSubjects.start.onNext();
   },
 
   overtime() {
-    subjects.overtime.onNext();
+    matchSubjects.overtime.onNext();
   },
 }
+
+export { matchActions, matchSubjects };

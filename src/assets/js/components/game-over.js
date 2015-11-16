@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-import matchActions from '../actions/match';
+import { matchActions } from '../actions/match';
 
-export default class GameOver extends Component {
+class GameOver extends Component {
 
   displayName: 'GameOver'
 
@@ -10,7 +10,7 @@ export default class GameOver extends Component {
     super(props);
   }
 
-  render = () => {
+  render() {
     let { level } = this.props.store.toJSON();
     return (
       <div>
@@ -28,3 +28,5 @@ export default class GameOver extends Component {
     )
   }
 }
+
+export default GameOver;

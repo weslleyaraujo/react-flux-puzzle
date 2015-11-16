@@ -1,13 +1,13 @@
 import Rx from 'rx';
 import { compose } from 'underscore';
 
-import matchActions from '../actions/match';
+import { matchSubjects } from '../actions/match';
 import * as utils from '../helpers/store-utils';
 
 let store = utils.getSchema();
 let subject = new Rx.BehaviorSubject(store);
 
-matchActions.subjects.trial.subscribe((id) => {
+matchSubjects.trial.subscribe((id) => {
   let mixer = compose(
     utils.setWinner,
     utils.setSound,
@@ -19,13 +19,13 @@ matchActions.subjects.trial.subscribe((id) => {
   subject.onNext(store);
 });
 
-matchActions.subjects.start.subscribe(() => {
+matchSubjects.start.subscribe(() => {
   let mixer = compose(utils.setPlaying);
   store = mixer(utils.getSchema());
   subject.onNext(store);
 });
 
-matchActions.subjects.overtime.subscribe(() => {
+matchSubjects.overtime.subscribe(() => {
   let mixer = compose(
       utils.setSound,
       utils.setGameOver

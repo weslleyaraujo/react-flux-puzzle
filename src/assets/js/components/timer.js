@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
 
-import countdown from '../helpers/countdown';
+import Countdown from '../helpers/countdown';
 import ProgressBar from './progress-bar';
-import matchActions from '../actions/match';
+import { matchActions } from '../actions/match';
 
 const SECOND = 1000;
 const INITIAL_TIME = SECOND * 10;
 
-export default class Timer extends Component {
+class Timer extends Component {
 
   displayName: 'Timer'
 
@@ -30,7 +30,11 @@ export default class Timer extends Component {
   }
 
   componentWillMount = (a, b) => {
-    this.countdown = countdown(INITIAL_TIME, ::this.onCountDownChange, ::this.onCountDownDone);
+    this.countdown = new Countdown({
+      duration: INITIAL_TIME,
+      onChange: ::this.onCountDownChange,
+      onDone: ::this.onCountDownDone
+    });
   }
 
   componentDidMount = () => {
@@ -64,3 +68,5 @@ export default class Timer extends Component {
   }
 
 }
+
+export default Timer;
