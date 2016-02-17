@@ -4,6 +4,10 @@ An experiment built with React + Rx + Immutable.js and the awesome Flux structur
 
 > You can play it and check it out here: [weslleyaraujo.github.io/react-flux-puzzle](http://weslleyaraujo.github.io/react-flux-puzzle)
 
+## Journey
+
+There is a [post](https://medium.com/@_weslleyaraujo/my-thoughts-on-my-first-flux-application-a1fd1cccd724) where I have written all the issues I have faced and the paths I have followed while developing this app.
+
 ## The reason
 
 I started this project with the intuit to apply some technologies that I have been studying in the last few months..
